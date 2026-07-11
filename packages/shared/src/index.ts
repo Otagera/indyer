@@ -1,6 +1,6 @@
-export type { Mode, Subject, Clue } from "./subject.ts";
+export type { Mode, Category, Subject, Clue, ClueSource } from "./subject.ts";
 export type { Axis } from "./axis.ts";
-export { MODE_CLUE_COUNTS } from "./axis.ts";
+export { AXES, MODE_CLUE_COUNTS } from "./axis.ts";
 export type { DailyIssue, Guess, PlayerState, GameState } from "./puzzle.ts";
 export type {
   HealthResponse,

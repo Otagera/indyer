@@ -6,17 +6,32 @@ import {
   serial,
   text,
   timestamp,
+  uniqueIndex,
   varchar,
 } from "drizzle-orm/pg-core";
 
 export const subjects = pgTable("subjects", {
   id: serial("id").primaryKey(),
   name: varchar("name", { length: 255 }).notNull(),
-  aliases: text("aliases").array(),
-  category: varchar("category", { length: 100 }).notNull(),
-  bioLine: text("bio_line"),
+  acceptedAnswers: text("accepted_answers").array().notNull().default([]),
+  category: varchar("category", { length: 20 }).notNull(),
+  era: varchar("era", { length: 50 }).notNull(),
+  active: boolean("active").notNull().default(true),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
+
+export const clues = pgTable("clues", {
+  id: serial("id").primaryKey(),
+  subjectId: integer("subject_id")
+    .references(() => subjects.id)
+    .notNull(),
+  axis: varchar("axis", { length: 20 }).notNull(),
+  text: text("text").notNull(),
+  source: jsonb("source"),
+  order: integer("order").notNull(),
+}, (t) => ({
+  uniqueSubjectAxis: uniqueIndex("uq_clues_subject_axis").on(t.subjectId, t.axis),
+}));
 
 export const puzzles = pgTable("puzzles", {
   id: serial("id").primaryKey(),
@@ -24,7 +39,6 @@ export const puzzles = pgTable("puzzles", {
   subjectId: integer("subject_id")
     .references(() => subjects.id)
     .notNull(),
-  clues: text("clues").array().notNull(),
   date: timestamp("date").notNull(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
