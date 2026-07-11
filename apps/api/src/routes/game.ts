@@ -102,6 +102,20 @@ game.get("/today", async (c) => {
     cluesShown: cluesRevealed,
   };
 
+  if (status === "solved" || status === "failed") {
+    const [puzzle] = await db
+      .select({ subjectId: puzzles.subjectId })
+      .from(puzzles)
+      .where(eq(puzzles.issueNo, issueNo))
+      .limit(1);
+    const [subject] = await db
+      .select({ name: subjects.name })
+      .from(subjects)
+      .where(eq(subjects.id, puzzle.subjectId))
+      .limit(1);
+    response.subjectName = subject.name;
+  }
+
   return c.json(response);
 });
 

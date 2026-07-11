@@ -3,12 +3,9 @@ import { GuessDots } from "./GuessDots";
 import { useGameStore } from "../stores/game";
 
 export function GameOver() {
-  const { screen, clues, guesses, mode, issueNo } = useGameStore();
+  const { screen, clues, guesses, mode, issueNo, answer } = useGameStore();
   const solved = screen === "solved";
   const used = guesses.length;
-  const guessesLeft = 6 - used;
-
-  const guessedCorrectly = guesses.some((g) => g.correct);
   const correctGuess = guesses.find((g) => g.correct);
 
   return (
@@ -43,10 +40,7 @@ export function GameOver() {
         <p className="font-body text-text-faint text-xs uppercase tracking-wider mb-1">
           The answer was
         </p>
-        <p className="font-headline text-xl text-ink">[answer reserved]</p>
-        <p className="font-body text-text-faint text-xs mt-1">
-          {guessesLeft} guess{guessesLeft !== 1 ? "es" : ""} remaining
-        </p>
+        <p className="font-headline text-xl text-ink">{answer ?? "—"}</p>
       </div>
 
       <button
