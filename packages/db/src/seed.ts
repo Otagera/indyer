@@ -28,6 +28,7 @@ async function seed() {
       axis: c.axis,
       text: c.text,
       order: c.order,
+      source: (c as any).source ?? null,
     }));
 
     await db.insert(clues).values(clueValues);

@@ -1,5 +1,5 @@
 import type { Guess } from "./puzzle.ts";
-import type { Mode } from "./subject.ts";
+import type { Mode, ClueSource } from "./subject.ts";
 
 export interface HealthResponse {
   status: "ok" | "error";
@@ -34,6 +34,7 @@ export interface ClueItem {
   number: number;
   text: string;
   axis: string;
+  source?: ClueSource | null;
 }
 
 export interface TodayResponse {

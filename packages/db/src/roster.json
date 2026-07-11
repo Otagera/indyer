@@ -216,11 +216,11 @@
     "era": "military era",
     "clues": [
       { "axis": "origin", "text": "I was born in Kano in 1938, into a Hausa-Fulani family.", "order": 1 },
-      { "axis": "work", "text": "I became Nigeria's Head of State in a 1975 palace coup and ruled for only six months.", "order": 2 },
+      { "axis": "work", "text": "I became Nigeria's Head of State in a 1975 palace coup and ruled for only six months.", "order": 2, "source": { "publication": "The New York Times", "date": "July 30, 1975", "page": "1", "permalink": "https://www.nytimes.com/1975/07/30/archives/gowon-ousted-in-nigeria-coup-ends-nineyear-rule-gowon-deposed-as.html" } },
       { "axis": "place", "text": "Lagos's international airport is named after me, the gateway for everyone who flies into the city.", "order": 3 },
       { "axis": "contemporary", "text": "I served alongside Olusegun Obasanjo, who succeeded me after my death.", "order": 4 },
       { "axis": "epithet", "text": "History remembers me as the Iron General for my swift, decisive leadership.", "order": 5 },
-      { "axis": "end", "text": "I was assassinated in a failed coup attempt in Lagos in 1976, my car riddled with bullets.", "order": 6 }
+      { "axis": "end", "text": "I was assassinated in a failed coup attempt in Lagos in 1976, my car riddled with bullets.", "order": 6, "source": { "publication": "The New York Times", "date": "February 15, 1976", "page": "1", "permalink": "https://www.nytimes.com/1976/02/15/archives/nigeria-confirms-killing-of-leader-military-council-gives-post-to.html" } }
     ]
   },
   {

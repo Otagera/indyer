@@ -6,10 +6,12 @@ import { createClient } from "./db/client.js";
 import { errorHandler } from "./middleware/error.js";
 import { requestLogger } from "./middleware/logger.js";
 import { identity } from "./middleware/identity.js";
+import { warmFonts } from "./lib/fonts.js";
 import { health } from "./routes/health.js";
 import { puzzle } from "./routes/puzzle.js";
 import { game } from "./routes/game.js";
 import { auth } from "./routes/auth.js";
+import { share } from "./routes/share.js";
 
 const app = new Hono();
 
@@ -23,6 +25,7 @@ app.route("/health", health);
 app.route("/puzzle", puzzle);
 app.route("/game", game);
 app.route("/auth", auth);
+app.route("/share", share);
 
 app.get("/", (c) => {
   return c.html(`<!DOCTYPE html>
@@ -54,6 +57,13 @@ async function main() {
     console.log("Database connected");
   } catch (e) {
     console.warn("Database not available yet:", (e as Error).message);
+  }
+
+  try {
+    await warmFonts();
+    console.log("Share card fonts loaded");
+  } catch (e) {
+    console.warn("Font loading failed:", (e as Error).message);
   }
 
   console.log(`Server starting on port ${config.port}`);

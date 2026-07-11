@@ -27,6 +27,17 @@ export function ClueBox({ clues }: ClueBoxProps) {
           <p className="font-body text-text-body text-sm leading-relaxed">
             {clue.text}
           </p>
+          {clue.source && (
+            <a
+              href={clue.source.permalink ?? "#"}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-shouty text-[9px] uppercase tracking-[0.1em] text-text-faint mt-1 block hover:text-ink transition-colors"
+            >
+              Source: {clue.source.publication} &middot; {clue.source.date}
+              {clue.source.page ? ` \u00b7 p.${clue.source.page}` : ""} &nearr;
+            </a>
+          )}
         </div>
       ))}
     </div>

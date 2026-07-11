@@ -1,5 +1,6 @@
 import { ClueBox } from "./ClueBox";
 import { GuessDots } from "./GuessDots";
+import { ShareButton } from "./ShareButton";
 import { useGameStore } from "../stores/game";
 
 const categoryLabels: Record<string, string> = {
@@ -80,6 +81,11 @@ export function GameOver() {
                 <span className="font-shouty text-[10px] uppercase tracking-[0.12em] text-text-faint block mb-0.5">
                   {clue.text}
                 </span>
+                {clue.source && (
+                  <span className="font-shouty text-[8px] uppercase tracking-[0.1em] text-text-faint mt-0.5 block">
+                    Source: {clue.source.publication} &middot; {clue.source.date}
+                  </span>
+                )}
               </div>
             ))}
           </div>
@@ -91,6 +97,8 @@ export function GameOver() {
           Played in {mode ?? "—"} mode &middot; {used}/6 guesses
         </p>
       </div>
+
+      <ShareButton />
 
       <button
         type="button"

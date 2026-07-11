@@ -5,7 +5,7 @@ import { subjects, clues, puzzles, gameStates } from "@indyer/db/schema";
 import { getSubjectForDate, getIssueNo } from "@indyer/db/puzzle-selector";
 import { MODE_CLUE_COUNTS } from "@indyer/shared";
 import { fuzzyMatch } from "../lib/fuzzy.js";
-import type { Mode, TodayResponse, StartResponse, GuessResponse, ClueItem } from "@indyer/shared";
+import type { Mode, TodayResponse, StartResponse, GuessResponse, ClueItem, ClueSource } from "@indyer/shared";
 
 const game = new Hono();
 
@@ -38,6 +38,17 @@ function getClueBudget(mode: Mode): number {
 
 function clampCluesRevealed(cluesRevealed: number, budget: number): number {
   return Math.min(cluesRevealed, budget);
+}
+
+interface ClueRow {
+  number: number;
+  text: string;
+  axis: string;
+  source: unknown;
+}
+
+function toClueItem(r: ClueRow): ClueItem {
+  return { number: r.number, text: r.text, axis: r.axis, source: r.source as ClueSource | null };
 }
 
 game.get("/today", async (c) => {
@@ -77,11 +88,11 @@ game.get("/today", async (c) => {
     .where(eq(puzzles.issueNo, issueNo))
     .limit(1);
 
-  const allClueRows = await db
-    .select({ number: clues.order, text: clues.text, axis: clues.axis })
+  const allClueRows: ClueItem[] = (await db
+    .select({ number: clues.order, text: clues.text, axis: clues.axis, source: clues.source })
     .from(clues)
     .where(eq(clues.subjectId, puzzle.subjectId))
-    .orderBy(clues.order);
+    .orderBy(clues.order)).map(toClueItem);
 
   const currentClues = allClueRows.slice(0, cluesRevealed);
 
@@ -149,7 +160,7 @@ game.post("/start", async (c) => {
   });
 
   const [firstClue] = await db
-    .select({ number: clues.order, text: clues.text, axis: clues.axis })
+    .select({ number: clues.order, text: clues.text, axis: clues.axis, source: clues.source })
     .from(clues)
     .where(eq(clues.subjectId, subjectId))
     .orderBy(clues.order)
@@ -158,7 +169,7 @@ game.post("/start", async (c) => {
   const response: StartResponse = {
     issueNo,
     mode,
-    clue: firstClue,
+    clue: firstClue ? toClueItem(firstClue) : null as unknown as ClueItem,
     cluesShown: 1,
     totalClues: 6,
     guessesLeft: 6,
@@ -228,7 +239,7 @@ game.post("/guess", async (c) => {
     cluesRevealed++;
 
     const [clueRow] = await db
-      .select({ number: clues.order, text: clues.text, axis: clues.axis })
+      .select({ number: clues.order, text: clues.text, axis: clues.axis, source: clues.source })
       .from(clues)
       .where(eq(clues.subjectId, subjectId))
       .orderBy(clues.order)
@@ -236,7 +247,7 @@ game.post("/guess", async (c) => {
       .limit(1);
 
     if (clueRow) {
-      nextClue = clueRow;
+      nextClue = toClueItem(clueRow);
     }
   }
 
@@ -263,11 +274,11 @@ game.post("/guess", async (c) => {
       ? {
           answer: subject.name,
           category: subject.category,
-          allClues: await db
-            .select({ number: clues.order, text: clues.text, axis: clues.axis })
+          allClues: (await db
+            .select({ number: clues.order, text: clues.text, axis: clues.axis, source: clues.source })
             .from(clues)
             .where(eq(clues.subjectId, subjectId))
-            .orderBy(clues.order),
+            .orderBy(clues.order)).map(toClueItem),
         }
       : {}),
   };
