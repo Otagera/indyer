@@ -75,4 +75,6 @@ export interface GuessResponse {
   guessesLeft: number;
   gameOver: boolean;
   answer?: string;
+  category?: string;
+  allClues?: ClueItem[];
 }

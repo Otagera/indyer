@@ -201,7 +201,7 @@ game.post("/guess", async (c) => {
   }
 
   const [subject] = await db
-    .select({ name: subjects.name, acceptedAnswers: subjects.acceptedAnswers })
+    .select({ name: subjects.name, category: subjects.category, acceptedAnswers: subjects.acceptedAnswers })
     .from(subjects)
     .where(eq(subjects.id, subjectId))
     .limit(1);
@@ -259,7 +259,17 @@ game.post("/guess", async (c) => {
     nextClue,
     guessesLeft,
     gameOver,
-    ...(gameOver ? { answer: subject.name } : {}),
+    ...(gameOver
+      ? {
+          answer: subject.name,
+          category: subject.category,
+          allClues: await db
+            .select({ number: clues.order, text: clues.text, axis: clues.axis })
+            .from(clues)
+            .where(eq(clues.subjectId, subjectId))
+            .orderBy(clues.order),
+        }
+      : {}),
   };
 
   return c.json(response);

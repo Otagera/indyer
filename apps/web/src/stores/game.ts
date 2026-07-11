@@ -27,6 +27,8 @@ interface GameState {
   totalClues: number;
   cluesShown: number;
   answer: string | null;
+  category: string | null;
+  allClues: ClueItem[];
   roster: string[];
 
   load: () => Promise<void>;
@@ -45,6 +47,8 @@ export const useGameStore = create<GameState>((set, get) => ({
   totalClues: 6,
   cluesShown: 0,
   answer: null,
+  category: null,
+  allClues: [],
   roster: [],
 
   load: async () => {
@@ -67,6 +71,8 @@ export const useGameStore = create<GameState>((set, get) => ({
           totalClues: today.totalClues,
           cluesShown: today.cluesShown ?? 0,
           answer: today.subjectName ?? null,
+          category: today.category ?? null,
+          allClues: today.allClues ?? [],
           roster: today.roster ?? [],
         });
       }
@@ -135,6 +141,8 @@ export const useGameStore = create<GameState>((set, get) => ({
           cluesShown: newClues.length,
           screen: data.correct ? "solved" : "failed",
           answer: data.answer ?? null,
+          category: data.category ?? null,
+          allClues: data.allClues ?? [],
         });
       } else {
         set({

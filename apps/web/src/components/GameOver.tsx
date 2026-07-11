@@ -2,11 +2,24 @@ import { ClueBox } from "./ClueBox";
 import { GuessDots } from "./GuessDots";
 import { useGameStore } from "../stores/game";
 
+const categoryLabels: Record<string, string> = {
+  leader: "Head of State",
+  musician: "Musician",
+  footballer: "Footballer",
+  writer: "Writer",
+  coup_plotter: "Coup Plotter",
+  regional_leader: "Regional Leader",
+  other: "Other",
+};
+
 export function GameOver() {
-  const { screen, clues, guesses, mode, issueNo, answer } = useGameStore();
+  const { screen, clues, allClues, guesses, mode, issueNo, answer, category } = useGameStore();
   const solved = screen === "solved";
   const used = guesses.length;
   const correctGuess = guesses.find((g) => g.correct);
+
+  const seenCount = clues.length;
+  const unseen = allClues.filter((c) => c.number > seenCount);
 
   return (
     <>
@@ -24,8 +37,17 @@ export function GameOver() {
         </p>
       </div>
 
-      <GuessDots total={6} used={used} guesses={guesses} mode={mode} />
-      <ClueBox clues={clues} />
+      <div className="border-2 border-ink p-4 mb-4 text-center">
+        <p className="font-body text-text-faint text-xs uppercase tracking-wider mb-1">
+          The answer was
+        </p>
+        <p className="font-headline text-xl text-ink mb-1">{answer ?? "—"}</p>
+        {category && (
+          <span className="inline-block font-shouty text-[10px] uppercase tracking-[0.08em] bg-ink text-paper px-2 py-0.5">
+            {categoryLabels[category] ?? category}
+          </span>
+        )}
+      </div>
 
       {solved && correctGuess && (
         <div className="bg-easy/10 border border-easy/30 px-3 py-2 mb-4">
@@ -36,11 +58,38 @@ export function GameOver() {
         </div>
       )}
 
-      <div className="border-2 border-ink p-4 mb-4 text-center">
-        <p className="font-body text-text-faint text-xs uppercase tracking-wider mb-1">
-          The answer was
+      <GuessDots total={6} used={used} guesses={guesses} mode={mode} />
+
+      <ClueBox clues={clues} />
+
+      {unseen.length > 0 && (
+        <>
+          <div className="flex items-center gap-2 mb-3 mt-2">
+            <div className="h-px flex-1 bg-paper-border-muted" />
+            <span className="font-shouty text-[10px] uppercase tracking-[0.15em] text-text-faint shrink-0">
+              Clues you didn&rsquo;t see
+            </span>
+            <div className="h-px flex-1 bg-paper-border-muted" />
+          </div>
+          <div className="space-y-2 mb-4 opacity-60">
+            {unseen.map((clue) => (
+              <div
+                key={clue.number}
+                className="bg-paper-aged border-l-4 border-paper-border-muted px-3 py-2"
+              >
+                <span className="font-shouty text-[10px] uppercase tracking-[0.12em] text-text-faint block mb-0.5">
+                  {clue.text}
+                </span>
+              </div>
+            ))}
+          </div>
+        </>
+      )}
+
+      <div className="mt-2 text-center">
+        <p className="font-body text-text-faint text-xs italic mb-3">
+          Played in {mode ?? "—"} mode &middot; {used}/6 guesses
         </p>
-        <p className="font-headline text-xl text-ink">{answer ?? "—"}</p>
       </div>
 
       <button
