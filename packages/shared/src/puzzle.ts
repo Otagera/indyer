@@ -27,3 +27,22 @@ export interface GameState {
   issue: DailyIssue;
   player: PlayerState;
 }
+
+export interface TodayPuzzle {
+  issueNo: number;
+  subject: {
+    name: string;
+    category: string;
+    era: string;
+    bioLine?: string;
+  };
+  clues: {
+    axis: string;
+    text: string;
+    order: number;
+  }[];
+  cluesShown: number;
+  totalClues: number;
+  mode: Mode | null;
+  modeLocked: boolean;
+}

@@ -45,11 +45,26 @@ export const puzzles = pgTable("puzzles", {
 
 export const gameStates = pgTable("game_states", {
   id: serial("id").primaryKey(),
-  playerId: varchar("player_id", { length: 255 }).notNull(),
+  playerId: varchar("player_id", { length: 36 }).notNull(),
   issueNo: integer("issue_no").notNull(),
   mode: varchar("mode", { length: 10 }),
   guesses: jsonb("guesses").default([]).notNull(),
   solved: boolean("solved").default(false).notNull(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
   updatedAt: timestamp("updated_at").defaultNow().notNull(),
+});
+
+export const playerIdentities = pgTable("player_identities", {
+  playerId: varchar("player_id", { length: 36 }).primaryKey(),
+  email: varchar("email", { length: 255 }).unique(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+export const authCodes = pgTable("auth_codes", {
+  id: serial("id").primaryKey(),
+  email: varchar("email", { length: 255 }).notNull(),
+  code: varchar("code", { length: 10 }).notNull(),
+  expiresAt: timestamp("expires_at").notNull(),
+  used: boolean("used").default(false).notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
 });

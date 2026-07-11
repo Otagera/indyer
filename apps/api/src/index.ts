@@ -5,16 +5,22 @@ import { config } from "./config.js";
 import { createClient } from "./db/client.js";
 import { errorHandler } from "./middleware/error.js";
 import { requestLogger } from "./middleware/logger.js";
+import { identity } from "./middleware/identity.js";
 import { health } from "./routes/health.js";
+import { puzzle } from "./routes/puzzle.js";
+import { auth } from "./routes/auth.js";
 
 const app = new Hono();
 
 app.use("*", cors({ origin: "http://localhost:5173", credentials: true }));
 app.use("*", requestLogger);
+app.use("*", identity);
 
 app.onError(errorHandler);
 
 app.route("/health", health);
+app.route("/puzzle", puzzle);
+app.route("/auth", auth);
 
 app.get("/", (c) => {
   return c.html(`<!DOCTYPE html>

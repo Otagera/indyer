@@ -56,3 +56,21 @@ export interface ApiError {
   error: string;
   code: string;
 }
+
+export interface MagicLinkRequest {
+  email: string;
+}
+
+export interface MagicLinkResponse {
+  sent: boolean;
+}
+
+export interface VerifyRequest {
+  email: string;
+  code: string;
+}
+
+export interface VerifyResponse {
+  ok: boolean;
+  isNew: boolean;
+}
