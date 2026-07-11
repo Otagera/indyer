@@ -5,6 +5,7 @@ import type {
   Mode,
   ClueItem,
 } from "@indyer/shared";
+import { MODE_CLUE_COUNTS } from "@indyer/shared";
 import { create } from "zustand";
 
 export type Screen = "loading" | "mode-select" | "playing" | "solved" | "failed";
@@ -26,6 +27,7 @@ interface GameState {
   totalClues: number;
   cluesShown: number;
   answer: string | null;
+  roster: string[];
 
   load: () => Promise<void>;
   startGame: (mode: Mode) => Promise<void>;
@@ -43,6 +45,7 @@ export const useGameStore = create<GameState>((set, get) => ({
   totalClues: 6,
   cluesShown: 0,
   answer: null,
+  roster: [],
 
   load: async () => {
     set({ screen: "loading", error: null });
@@ -52,7 +55,7 @@ export const useGameStore = create<GameState>((set, get) => ({
       const today: TodayResponse = await res.json();
 
       if (today.status === "new") {
-        set({ screen: "mode-select", today, issueNo: today.issueNo, totalClues: today.totalClues });
+        set({ screen: "mode-select", today, issueNo: today.issueNo, totalClues: today.totalClues, roster: today.roster ?? [] });
       } else {
         set({
           screen: today.status === "solved" ? "solved" : today.status === "failed" ? "failed" : "playing",
@@ -64,6 +67,7 @@ export const useGameStore = create<GameState>((set, get) => ({
           totalClues: today.totalClues,
           cluesShown: today.cluesShown ?? 0,
           answer: today.subjectName ?? null,
+          roster: today.roster ?? [],
         });
       }
     } catch (e) {

@@ -1,4 +1,4 @@
-import { type FormEvent, useRef } from "react";
+import { type FormEvent, useRef, useId } from "react";
 
 interface InputProps {
   value: string;
@@ -6,10 +6,12 @@ interface InputProps {
   onSubmit: () => void;
   disabled?: boolean;
   remaining: number;
+  suggestions?: string[];
 }
 
-export function Input({ value, onChange, onSubmit, disabled = false, remaining }: InputProps) {
+export function Input({ value, onChange, onSubmit, disabled = false, remaining, suggestions }: InputProps) {
   const inputRef = useRef<HTMLInputElement>(null);
+  const listId = useId();
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -26,8 +28,17 @@ export function Input({ value, onChange, onSubmit, disabled = false, remaining }
         onChange={(e) => onChange(e.target.value)}
         disabled={disabled}
         placeholder="Type your guess..."
+        list={suggestions?.length ? listId : undefined}
+        autoComplete="off"
         className="flex-1 font-mono text-sm text-ink bg-paper-inset px-3 py-2 border-2 border-ink border-r-0 outline-none placeholder:text-text-faint disabled:opacity-50"
       />
+      {suggestions && suggestions.length > 0 && (
+        <datalist id={listId}>
+          {suggestions.map((s) => (
+            <option key={s} value={s} />
+          ))}
+        </datalist>
+      )}
       <button
         type="submit"
         disabled={disabled || !value.trim()}
