@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,900;1,600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,500&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    @keyframes clueIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+    @keyframes barIn { from { transform:scaleX(0); } to { transform:scaleX(1); } }
+    body { margin:0; background:#dcd6c6; }
+  </style>
+</helmet>
+
+<div style="min-height:100vh; background:#dcd6c6; display:flex; flex-direction:column; align-items:center; gap:32px; padding:40px 16px 80px; font-family:'Source Serif 4', serif;">
+
+  <!-- ===== NAV / SCREEN SWITCHER ===== -->
+  <div style="display:flex; gap:6px; background:#c9c2ae; padding:5px; border-radius:999px; font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:0.04em;">
+    <sc-for list="{{ screens }}" as="s" hint-placeholder-count="4">
+      <div onClick="{{ s.go }}" style="{{ s.tabStyle }}">{{ s.label }}</div>
+    </sc-for>
+  </div>
+
+  <!-- ===== SHARE CARD SCREEN ===== -->
+  <sc-if value="{{ isCard }}" hint-placeholder-val="{{ true }}">
+    <div style="display:flex; flex-direction:column; align-items:center; gap:18px;">
+      <div style="width:360px; aspect-ratio:4/5; background:#f2ecdc; border:1px solid #1a1712; box-shadow:0 18px 40px -12px rgba(20,16,8,0.45); position:relative; overflow:hidden; display:flex; flex-direction:column;">
+        <!-- paper texture -->
+        <div style="position:absolute; inset:0; background-image:radial-gradient(rgba(26,23,18,0.05) 0.6px, transparent 0.6px); background-size:3px 3px; opacity:0.5; pointer-events:none;"></div>
+
+        <!-- masthead -->
+        <div style="padding:20px 22px 0; text-align:center; position:relative;">
+          <div style="font-family:'IBM Plex Mono', monospace; font-size:9.5px; letter-spacing:0.18em; color:#3a3428; display:flex; justify-content:space-between; text-transform:uppercase;">
+            <span>No. {{ issueNo }}</span>
+            <span style="color: {{ modeColor }}; font-weight:600;">{{ modeLabelUpper }}</span>
+          </div>
+          <div style="border-top:2px solid #17140f; border-bottom:1px solid #17140f; margin-top:8px; padding:10px 0 8px;">
+            <div style="font-family:'Playfair Display', serif; font-weight:900; font-size:34px; letter-spacing:0.01em; color:#17140f;">NEW HERALD</div>
+          </div>
+          <div style="height:3px; display:flex; margin-top:0;">
+            <div style="flex:1; background:{{ accentGreen }};"></div>
+            <div style="flex:1; background:{{ accentGold }};"></div>
+            <div style="flex:1; background:{{ accentRed }};"></div>
+          </div>
+          <div style="font-family:'Playfair Display', serif; font-style:italic; font-weight:600; font-size:13px; color:#3a3428; margin-top:9px;">Who's behind the headline? Guess in six.</div>
+          <div style="font-family:'IBM Plex Mono', monospace; font-size:8px; letter-spacing:0.16em; color:#867d69; margin-top:5px; text-transform:uppercase;">An Indyer Puzzle &middot; Not an Archival Record</div>
+        </div>
+
+        <!-- redacted headline -->
+        <div style="flex:1; display:flex; flex-direction:column; justify-content:center; align-items:center; padding:6px 26px 8px; gap:12px;">
+          <div style="font-family:'IBM Plex Mono', monospace; font-size:9.5px; letter-spacing:0.14em; color:{{ accentGold }}; text-transform:uppercase; font-weight:600; border:1px solid {{ accentGold }}; padding:3px 10px;">Category: {{ shareCategory }}</div>
+          <div style="width:100%; display:flex; flex-direction:column; gap:9px; align-items:center;">
+            <div style="height:22px; width:88%; background:#17140f; transform:rotate(-1.1deg); animation:barIn 0.5s ease-out;"></div>
+            <div style="height:22px; width:62%; background:#17140f; transform:rotate(-1.1deg); animation:barIn 0.6s ease-out;"></div>
+          </div>
+          <div style="font-family:'IBM Plex Mono', monospace; font-size:10px; letter-spacing:0.12em; color:#6b6350; text-transform:uppercase;">Name redacted &middot; guess to reveal</div>
+        </div>
+
+        <!-- result -->
+        <div style="padding:0 24px; display:flex; flex-direction:column; align-items:center; gap:10px;">
+          <div style="font-family:'IBM Plex Mono', monospace; font-weight:600; font-size:15px; letter-spacing:0.1em; color:#17140f; background:{{ modeColorTint }}; padding:4px 12px; border:1px solid {{ modeColor }};">{{ modeLabelUpper }} &middot; {{ shareResultFraction }}</div>
+          <div style="display:flex; gap:6px;">
+            <sc-for list="{{ shareDots }}" as="d" hint-placeholder-count="6">
+              <div style="{{ d.style }}"></div>
+            </sc-for>
+          </div>
+        </div>
+
+        <!-- clue line -->
+        <div style="margin:14px 24px 0; padding-top:12px; border-top:2px dashed {{ modeColor }};">
+          <div style="font-family:'IBM Plex Mono', monospace; font-size:9px; letter-spacing:0.14em; color:{{ modeColor }}; text-transform:uppercase; margin-bottom:5px; font-weight:600;">Surviving clue</div>
+          <div style="font-family:'Source Serif 4', serif; font-style:italic; font-size:14.5px; line-height:1.4; color:#221e16;">&ldquo;{{ shareClueLine }}&rdquo;</div>
+        </div>
+
+        <!-- credit -->
+        <div style="margin-top:auto; padding:14px 24px 18px; display:flex; justify-content:space-between; align-items:flex-end;">
+          <div style="font-family:'IBM Plex Mono', monospace; font-size:8px; letter-spacing:0.1em; color:#867d69; max-width:62%; line-height:1.5;">FRONT PAGE STYLING &mdash; ARCHIVE CREDIT PENDING PARTNERSHIP</div>
+          <div style="font-family:'Playfair Display', serif; font-weight:700; font-style:italic; font-size:13px; color:{{ accentGold }};">Play at indyer.app</div>
+        </div>
+      </div>
+
+      <div style="display:flex; gap:10px; align-items:center;">
+        <div style="font-family:'IBM Plex Mono', monospace; font-size:11px; color:#4a4436; letter-spacing:0.06em;">The image every player pastes into WhatsApp</div>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- ===== MODE SELECT SCREEN ===== -->
+  <sc-if value="{{ isMode }}" hint-placeholder-val="{{ false }}">
+    <div style="width:375px; background:#f2ecdc; border:1px solid #1a1712; min-height:720px; display:flex; flex-direction:column; box-shadow:0 18px 40px -12px rgba(20,16,8,0.35);">
+      <div style="padding:22px 22px 14px; text-align:center; border-bottom:2px solid #17140f;">
+        <div style="font-family:'IBM Plex Mono', monospace; font-size:9px; letter-spacing:0.18em; color:#5a5344; text-transform:uppercase;">No. {{ issueNo }} &middot; Today's Edition</div>
+        <div style="font-family:'Playfair Display', serif; font-weight:900; font-size:30px; color:#17140f; margin-top:6px;">NEW HERALD</div>
+      </div>
+
+      <div style="padding:26px 24px 20px;">
+        <div style="font-family:'Playfair Display', serif; font-weight:700; font-size:20px; color:#17140f; text-align:center;">Choose your edition</div>
+        <div style="font-family:'Source Serif 4', serif; font-size:13.5px; color:#4a4436; text-align:center; margin-top:8px; line-height:1.5;">Six guesses either way. Fewer clues, harder read. Locks the moment you pick.</div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:14px; padding:0 22px;">
+        <sc-for list="{{ modeOptions }}" as="m" hint-placeholder-count="3">
+          <div onClick="{{ m.select }}" style="{{ m.cardStyle }}">
+            <div style="display:flex; justify-content:space-between; align-items:baseline;">
+              <div style="font-family:'Playfair Display', serif; font-weight:700; font-size:19px; color:{{ m.color }};">{{ m.name }}</div>
+              <div style="font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:0.08em; color:#5a5344;">{{ m.clueCount }} clues</div>
+            </div>
+            <div style="font-family:'Source Serif 4', serif; font-size:12.5px; color:#5a5344; margin-top:6px; line-height:1.4;">{{ m.desc }}</div>
+          </div>
+        </sc-for>
+      </div>
+
+      <div style="margin-top:auto; padding:22px; display:flex; flex-direction:column; gap:10px;">
+        <div onClick="{{ lockMode }}" style="{{ lockButtonStyle }}">{{ lockButtonLabel }}</div>
+        <div style="font-family:'IBM Plex Mono', monospace; font-size:9.5px; letter-spacing:0.08em; color:#867d69; text-align:center; text-transform:uppercase;">One edition per day &middot; no switching back</div>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- ===== PLAY SCREEN ===== -->
+  <sc-if value="{{ isPlay }}" hint-placeholder-val="{{ false }}">
+    <div style="width:375px; background:#f2ecdc; border:1px solid #1a1712; min-height:720px; display:flex; flex-direction:column; box-shadow:0 18px 40px -12px rgba(20,16,8,0.35);">
+      <div style="padding:16px 20px 12px; border-bottom:2px solid #17140f; display:flex; justify-content:space-between; align-items:center;">
+        <div>
+          <div style="font-family:'IBM Plex Mono', monospace; font-size:9px; letter-spacing:0.16em; color:{{ modeColor }}; text-transform:uppercase; font-weight:600;">No. {{ issueNo }} &middot; {{ modeLabelUpper }}</div>
+          <div style="font-family:'Playfair Display', serif; font-weight:900; font-size:22px; color:#17140f;">NEW HERALD</div>
+        </div>
+        <div style="display:flex; gap:5px;">
+          <sc-for list="{{ playDots }}" as="d" hint-placeholder-count="6">
+            <div style="{{ d.style }}"></div>
+          </sc-for>
+        </div>
+      </div>
+
+      <div style="flex:1; overflow-y:auto; padding:16px 20px; display:flex; flex-direction:column; gap:10px; max-height:420px;">
+        <sc-for list="{{ visibleClues }}" as="c" hint-placeholder-count="2">
+          <div style="animation:clueIn 0.35s ease-out; border-left:3px solid {{ modeColor }}; padding:8px 0 8px 12px;">
+            <div style="font-family:'IBM Plex Mono', monospace; font-size:9px; letter-spacing:0.12em; color:{{ modeColor }}; text-transform:uppercase; font-weight:600;">Clue {{ c.n }}</div>
+            <div style="font-family:'Source Serif 4', serif; font-size:14px; line-height:1.45; color:#221e16; margin-top:3px;">{{ c.text }}</div>
+          </div>
+        </sc-for>
+
+        <sc-if value="{{ hasWrongGuesses }}" hint-placeholder-val="{{ false }}">
+          <div style="margin-top:8px; padding-top:10px; border-top:1px dashed #4a4436;">
+            <div style="font-family:'IBM Plex Mono', monospace; font-size:9px; letter-spacing:0.12em; color:#867d69; text-transform:uppercase; margin-bottom:6px;">Wrong guesses</div>
+            <div style="display:flex; flex-direction:column; gap:5px;">
+              <sc-for list="{{ wrongGuesses }}" as="w" hint-placeholder-count="1">
+                <div style="font-family:'Source Serif 4', serif; font-size:13.5px; color:#8a8270; text-decoration:line-through; text-decoration-color:#b3341f;">{{ w.text }}</div>
+              </sc-for>
+            </div>
+          </div>
+        </sc-if>
+      </div>
+
+      <div style="padding:16px 20px 20px; border-top:2px solid #17140f; display:flex; flex-direction:column; gap:10px;">
+        <div style="display:flex; gap:8px;">
+          <input value="{{ guessValue }}" onChange="{{ onGuessChange }}" onKeyDown="{{ onGuessKeyDown }}" placeholder="Name your subject&hellip;" style="flex:1; font-family:'Source Serif 4', serif; font-size:14.5px; padding:11px 12px; border:1px solid #17140f; background:#fbf8ef; color:#17140f; outline:none;" />
+          <div onClick="{{ submitGuess }}" style="font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:0.08em; background:#17140f; color:#f2ecdc; padding:11px 16px; display:flex; align-items:center; cursor:pointer; text-transform:uppercase;">Guess</div>
+        </div>
+        <div style="font-family:'IBM Plex Mono', monospace; font-size:9.5px; letter-spacing:0.06em; color:#867d69; text-align:center;">{{ guessesRemainingLabel }}</div>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- ===== END SCREEN ===== -->
+  <sc-if value="{{ isEnd }}" hint-placeholder-val="{{ false }}">
+    <div style="width:375px; background:#f2ecdc; border:1px solid #1a1712; min-height:720px; display:flex; flex-direction:column; box-shadow:0 18px 40px -12px rgba(20,16,8,0.35);">
+      <div style="padding:20px 22px 14px; text-align:center; border-bottom:2px solid #17140f;">
+        <div style="font-family:'IBM Plex Mono', monospace; font-size:9px; letter-spacing:0.16em; color:{{ modeColor }}; text-transform:uppercase; font-weight:600;">No. {{ issueNo }} &middot; {{ endResultLabel }}</div>
+        <div style="font-family:'Playfair Display', serif; font-weight:900; font-size:26px; color:#17140f; margin-top:5px;">{{ subjectName }}</div>
+      </div>
+
+      <div style="flex:1; overflow-y:auto; padding:16px 22px; display:flex; flex-direction:column; gap:9px;">
+        <sc-for list="{{ endClues }}" as="c" hint-placeholder-count="6">
+          <div style="{{ c.wrapStyle }}">
+            <div style="font-family:'IBM Plex Mono', monospace; font-size:9px; letter-spacing:0.12em; color:#867d69; text-transform:uppercase; display:flex; justify-content:space-between;">
+              <span>Clue {{ c.n }}</span>
+              <span style="color: {{ c.tagColor }}; font-weight:600;">{{ c.tag }}</span>
+            </div>
+            <div style="font-family:'Source Serif 4', serif; font-size:13.5px; line-height:1.45; color:#221e16; margin-top:3px;">{{ c.text }}</div>
+          </div>
+        </sc-for>
+      </div>
+
+      <div style="padding:16px 22px 22px; border-top:2px solid #17140f; display:flex; flex-direction:column; gap:10px;">
+        <div onClick="{{ goCard }}" style="font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:0.08em; background:#17140f; color:#f2ecdc; padding:13px; text-align:center; cursor:pointer; text-transform:uppercase;">View share card</div>
+        <div onClick="{{ replay }}" style="font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:0.06em; color:#5a5344; text-align:center; cursor:pointer;">Play again (demo)</div>
+      </div>
+    </div>
+  </sc-if>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const CLUES = [
+  "Born in the same decade Nigeria gained independence.",
+  "Their most famous work is studied in classrooms far outside Nigeria.",
+  "They've spent significant time living and working abroad.",
+  "A recurring theme in their work is the weight of tradition on women.",
+  "They've won one of the world's most prestigious literary honors.",
+  "Their debut novel, published in their mid-20s, made them internationally known overnight."
+];
+const SUBJECT = "Chimamanda Ngozi Adichie";
+const SUBJECT_CATEGORY = "Writer";
+const MODE_META = {
+  easy:   { name: "Easy",   clueCount: 6, desc: "All six clues on the table before you guess.", color: "#1e7a4c" },
+  normal: { name: "Normal", clueCount: 4, desc: "Four clues. A fair fight.", color: "#c9871f" },
+  hard:   { name: "Hard",   clueCount: 2, desc: "Two clues. Everything else is nerve.", color: "#ab2b22" }
+};
+const ACCENT_GREEN = "#1e7a4c";
+const ACCENT_GOLD = "#c9871f";
+const ACCENT_RED = "#ab2b22";
+
+class Component extends DCLogic {
+  state = {
+    screen: "card",
+    mode: null,
+    guesses: [],       // {text, correct}
+    guessValue: "",
+    solved: false
+  };
+
+  go(screen) { this.setState({ screen }); }
+
+  selectMode(key) { this.setState({ mode: key }); }
+
+  lockMode() {
+    if (!this.state.mode) return;
+    this.setState({ screen: "play", guesses: [], guessValue: "", solved: false });
+  }
+
+  onGuessChange(e) { this.setState({ guessValue: e.target.value }); }
+
+  onGuessKeyDown(e) { if (e.key === "Enter") this.submitGuess(); }
+
+  submitGuess() {
+    const val = this.state.guessValue.trim();
+    if (!val || this.state.guesses.length >= 6 || this.state.solved) return;
+    const correct = val.toLowerCase() === SUBJECT.toLowerCase();
+    const guesses = [...this.state.guesses, { text: val, correct }];
+    const solved = correct;
+    this.setState({ guesses, guessValue: "", solved });
+    if (solved || guesses.length >= 6) {
+      setTimeout(() => this.setState({ screen: "end" }), correct ? 450 : 250);
+    }
+  }
+
+  replay() {
+    this.setState({ screen: "mode", mode: null, guesses: [], guessValue: "", solved: false });
+  }
+
+  goCard() { this.setState({ screen: "card" }); }
+
+  renderVals() {
+    const s = this.state;
+    const mode = s.mode || "hard";
+    const baseClueCount = MODE_META[mode].clueCount;
+    const wrongCount = s.guesses.filter(g => !g.correct).length;
+    const cluesShown = Math.min(6, baseClueCount + wrongCount);
+    const modeLabelUpper = MODE_META[mode].name.toUpperCase();
+
+    const screens = [
+      { key: "card", label: "Share Card" },
+      { key: "mode", label: "Mode Select" },
+      { key: "play", label: "Play" },
+      { key: "end", label: "End" }
+    ].map(sc => ({
+      label: sc.label,
+      go: () => this.go(sc.key),
+      tabStyle: {
+        padding: "8px 14px",
+        borderRadius: "999px",
+        cursor: "pointer",
+        background: s.screen === sc.key ? "#17140f" : "transparent",
+        color: s.screen === sc.key ? "#f2ecdc" : "#3a3428",
+        transition: "all .15s ease"
+      }
+    }));
+
+    // ---- share card demo state (illustrative "Hard 3/6" result) ----
+    const shareResultFraction = "3/6";
+    const shareDots = [0,1,2,3,4,5].map(i => ({
+      style: {
+        width: "9px", height: "9px", borderRadius: "50%",
+        background: i < 2 ? ACCENT_RED : (i === 2 ? MODE_META[mode].color : "transparent"),
+        border: i >= 3 ? `1px solid ${MODE_META[mode].color}` : "none"
+      }
+    }));
+    const shareClueLine = "A recurring theme in their work is the weight of tradition on women.";
+
+    // ---- mode select ----
+    const modeOptions = Object.keys(MODE_META).map(key => {
+      const m = MODE_META[key];
+      const selected = s.mode === key;
+      return {
+        name: m.name,
+        clueCount: m.clueCount,
+        desc: m.desc,
+        select: () => this.selectMode(key),
+        color: m.color,
+        cardStyle: {
+          borderTop: selected ? `1px solid ${m.color}` : "1px solid #b8b096",
+          borderRight: selected ? `1px solid ${m.color}` : "1px solid #b8b096",
+          borderBottom: selected ? `1px solid ${m.color}` : "1px solid #b8b096",
+          borderLeft: `4px solid ${m.color}`,
+          background: selected ? `${m.color}1a` : "#f8f4e8",
+          padding: "14px 16px",
+          cursor: "pointer",
+          transition: "all .15s ease"
+        }
+      };
+    });
+    const lockButtonStyle = {
+      fontFamily: "'IBM Plex Mono', monospace",
+      fontSize: "13px",
+      letterSpacing: "0.08em",
+      textTransform: "uppercase",
+      textAlign: "center",
+      padding: "14px",
+      cursor: s.mode ? "pointer" : "default",
+      background: s.mode ? MODE_META[s.mode].color : "#c9c2ae",
+      color: s.mode ? "#f8f4e8" : "#867d69"
+    };
+    const lockButtonLabel = s.mode ? `Lock in ${MODE_META[s.mode].name}` : "Choose an edition above";
+
+    // ---- play screen ----
+    const visibleClues = CLUES.slice(0, cluesShown).map((text, i) => ({ n: i + 1, text }));
+    const wrongGuesses = s.guesses.filter(g => !g.correct).map(g => ({ text: g.text }));
+    const playDots = [0,1,2,3,4,5].map(i => {
+      const g = s.guesses[i];
+      let bg = "transparent", border = "1px solid #17140f";
+      if (g) { bg = g.correct ? MODE_META[mode].color : ACCENT_RED; border = "none"; }
+      return { style: { width: "10px", height: "10px", borderRadius: "50%", background: bg, border } };
+    });
+    const guessesRemainingLabel = s.solved
+      ? "Solved — see the reveal"
+      : `${6 - s.guesses.length} guess${6 - s.guesses.length === 1 ? "" : "es"} remaining`;
+
+    // ---- end screen ----
+    const endResultLabel = s.solved ? `Solved · ${s.guesses.length}/6` : "Not solved · 6/6";
+    const endClues = CLUES.map((text, i) => {
+      const n = i + 1;
+      const wasSeen = n <= cluesShown;
+      return {
+        n,
+        text,
+        tag: wasSeen ? "Seen" : "Unseen",
+        tagColor: wasSeen ? MODE_META[mode].color : "#a89f8a",
+        wrapStyle: {
+          borderLeft: `3px solid ${wasSeen ? MODE_META[mode].color : "#c9c2ae"}`,
+          padding: "7px 0 7px 12px",
+          opacity: wasSeen ? 1 : 0.65
+        }
+      };
+    });
+
+    return {
+      screens,
+      isCard: s.screen === "card",
+      isMode: s.screen === "mode",
+      isPlay: s.screen === "play",
+      isEnd: s.screen === "end",
+      issueNo: 214,
+      modeLabelUpper,
+      modeColor: MODE_META[mode].color,
+      modeColorTint: `${MODE_META[mode].color}14`,
+      accentGreen: ACCENT_GREEN,
+      accentGold: ACCENT_GOLD,
+      accentRed: ACCENT_RED,
+      shareResultFraction,
+      shareCategory: SUBJECT_CATEGORY,
+      shareDots,
+      shareClueLine,
+      modeOptions,
+      lockMode: () => this.lockMode(),
+      lockButtonStyle,
+      lockButtonLabel,
+      visibleClues,
+      hasWrongGuesses: wrongGuesses.length > 0,
+      wrongGuesses,
+      guessValue: s.guessValue,
+      onGuessChange: (e) => this.onGuessChange(e),
+      onGuessKeyDown: (e) => this.onGuessKeyDown(e),
+      submitGuess: () => this.submitGuess(),
+      guessesRemainingLabel,
+      playDots,
+      subjectName: SUBJECT,
+      endResultLabel,
+      endClues,
+      goCard: () => this.goCard(),
+      replay: () => this.replay()
+    };
+  }
+}
+
+</script>
+</body>
+</html>

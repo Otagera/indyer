@@ -1,0 +1,34 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: indyer
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-indyer}
+      POSTGRES_DB: indyer
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - indyer
+
+  api:
+    image: ghcr.io/otagera/indyer-api:latest
+    pull_policy: always
+    depends_on:
+      - postgres
+    environment:
+      DATABASE_URL: postgres://indyer:${POSTGRES_PASSWORD}@postgres:5432/indyer
+      NODE_ENV: production
+      PORT: 3001
+      CORS_ORIGIN: https://indyer.otagera.xyz
+    ports:
+      - "3001:3001"
+    networks:
+      - indyer
+
+volumes:
+  pgdata:
+
+networks:
+  indyer:

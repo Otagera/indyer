@@ -1,0 +1,21 @@
+{
+  "name": "indyer",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "pnpm --parallel -r run dev",
+    "lint": "biome check .",
+    "lint:fix": "biome check --apply .",
+    "typecheck": "pnpm -r run typecheck",
+    "db:generate": "pnpm --filter @indyer/db db:generate",
+    "db:migrate": "pnpm --filter @indyer/db db:migrate",
+    "db:seed": "pnpm --filter @indyer/db db:seed"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.9.4"
+  },
+  "engines": {
+    "node": ">=20",
+    "pnpm": ">=9"
+  }
+}
