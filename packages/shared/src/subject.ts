@@ -2,7 +2,7 @@ import type { Axis } from "./axis.ts";
 
 export type Mode = "easy" | "normal" | "hard";
 
-export type Category = "leader" | "musician" | "footballer" | "writer" | "other";
+export type Category = "leader" | "musician" | "footballer" | "writer" | "coup_plotter" | "regional_leader" | "other";
 
 export interface Subject {
   id: number;

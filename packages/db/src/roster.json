@@ -1,0 +1,425 @@
+[
+  {
+    "name": "Chinua Achebe",
+    "acceptedAnswers": ["achebe", "chinua achebe", "albert chinụalụmọgụ achebe", "chinua"],
+    "category": "writer",
+    "era": "first republic",
+    "clues": [
+      { "axis": "origin", "text": "I was born in Ogidi, a town in Eastern Nigeria, in 1930.", "order": 1 },
+      { "axis": "work", "text": "My first novel was published in 1958 and has sold over 20 million copies worldwide.", "order": 2 },
+      { "axis": "place", "text": "I was a professor at the University of Nigeria, Nsukka, where the library now bears my name.", "order": 3 },
+      { "axis": "contemporary", "text": "I was a friend and contemporary of Wole Soyinka, though we often disagreed.", "order": 4 },
+      { "axis": "epithet", "text": "I am widely called the Father of African Literature.", "order": 5 },
+      { "axis": "end", "text": "I died in Boston in 2013 at the age of 82, but my spirit remains in my books.", "order": 6 }
+    ]
+  },
+  {
+    "name": "Fela Kuti",
+    "acceptedAnswers": ["fela", "fela kuti", "fela anikulapo kuti", "féla", "abami eda"],
+    "category": "musician",
+    "era": "military era",
+    "clues": [
+      { "axis": "origin", "text": "I was born in Abeokuta in 1938 into a family of activists.", "order": 1 },
+      { "axis": "work", "text": "I invented a genre of music that blends jazz, funk, and traditional Yoruba rhythms.", "order": 2 },
+      { "axis": "place", "text": "My nightclub in Lagos was called the Shrine, and it was the heart of my movement.", "order": 3 },
+      { "axis": "contemporary", "text": "My mother was a prominent activist whose portrait now adorns the 20 naira note.", "order": 4 },
+      { "axis": "epithet", "text": "I am remembered by the name I gave myself: Abami Eda, the Strange One.", "order": 5 },
+      { "axis": "end", "text": "I died in 1997 from complications of AIDS, but my music lives on as a global protest anthem.", "order": 6 }
+    ]
+  },
+  {
+    "name": "Ngozi Okonjo-Iweala",
+    "acceptedAnswers": ["okonjo-iweala", "ngozi okonjo-iweala", "dr ngozi", "ngozi"],
+    "category": "leader",
+    "era": "contemporary",
+    "clues": [
+      { "axis": "origin", "text": "I was born in 1954 in Ogwashi-Ukwu, Delta State.", "order": 1 },
+      { "axis": "work", "text": "I am the first woman and first African to lead the World Trade Organization.", "order": 2 },
+      { "axis": "place", "text": "I served twice as Nigeria's Finance Minister in Abuja.", "order": 3 },
+      { "axis": "contemporary", "text": "I am a fellow Nigerian with Chimamanda Adichie, and we have appeared together on global stages.", "order": 4 },
+      { "axis": "epithet", "text": "Forbes named me one of the 100 Most Powerful Women in the World.", "order": 5 },
+      { "axis": "end", "text": "I am still serving as WTO Director-General, shaping global trade policy.", "order": 6 }
+    ]
+  },
+  {
+    "name": "Kanu Nwankwo",
+    "acceptedAnswers": ["kanu", "nwankwo kanu", "kanu nwankwo", "papilo"],
+    "category": "footballer",
+    "era": "contemporary",
+    "clues": [
+      { "axis": "origin", "text": "I was born in Owerri, Imo State, in 1976.", "order": 1 },
+      { "axis": "work", "text": "I won the UEFA Champions League with Ajax Amsterdam at age 19.", "order": 2 },
+      { "axis": "place", "text": "I played for Arsenal's Invincibles, the team that went an entire Premier League season unbeaten.", "order": 3 },
+      { "axis": "contemporary", "text": "I captained the Nigerian national team alongside Jay-Jay Okocha.", "order": 4 },
+      { "axis": "epithet", "text": "Fans call me Papilo, a nickname that means Daddy in my native dialect.", "order": 5 },
+      { "axis": "end", "text": "I now run the Kanu Heart Foundation, saving children with heart defects.", "order": 6 }
+    ]
+  },
+  {
+    "name": "Chimamanda Ngozi Adichie",
+    "acceptedAnswers": ["adichie", "chimamanda", "chimamanda adichie", "chimamanda ngozi adichie"],
+    "category": "writer",
+    "era": "contemporary",
+    "clues": [
+      { "axis": "origin", "text": "I was born in Enugu in 1977 and grew up in Nsukka.", "order": 1 },
+      { "axis": "work", "text": "My novel Half of a Yellow Sun won the Orange Prize for Fiction in 2007.", "order": 2 },
+      { "axis": "place", "text": "I divide my time between Nigeria and the United States, where I teach writing workshops.", "order": 3 },
+      { "axis": "contemporary", "text": "Beyoncé sampled my words on her album, introducing me to millions of new readers.", "order": 4 },
+      { "axis": "epithet", "text": "I am often called one of the most influential African writers of my generation.", "order": 5 },
+      { "axis": "end", "text": "I continue to write novels, essays, and speeches that shape global conversations on race and feminism.", "order": 6 }
+    ]
+  },
+  {
+    "name": "Wole Soyinka",
+    "acceptedAnswers": ["soyinka", "wole soyinka", "aka wole soyinka", "wole"],
+    "category": "writer",
+    "era": "first republic",
+    "clues": [
+      { "axis": "origin", "text": "I was born in Abeokuta in 1934, the same town Fela Kuti called home.", "order": 1 },
+      { "axis": "work", "text": "I wrote The Lion and the Jewel and Season of Anomy, plays performed worldwide.", "order": 2 },
+      { "axis": "place", "text": "I was a professor at the University of Ibadan and later taught at Harvard and Oxford.", "order": 3 },
+      { "axis": "contemporary", "text": "I was imprisoned during the Nigerian Civil War and wrote my prison notes on toilet paper.", "order": 4 },
+      { "axis": "epithet", "text": "I am the first African to win the Nobel Prize in Literature.", "order": 5 },
+      { "axis": "end", "text": "At 90, I remain a vocal critic of tyranny and an enduring symbol of African letters.", "order": 6 }
+    ]
+  },
+  {
+    "name": "Burna Boy",
+    "acceptedAnswers": ["burna boy", "damini ogulu", "burna", "african giant"],
+    "category": "musician",
+    "era": "contemporary",
+    "clues": [
+      { "axis": "origin", "text": "I was born in Port Harcourt in 1991 to a Nigerian mother and a British father.", "order": 1 },
+      { "axis": "work", "text": "My album African Giant was nominated for a Grammy, and I won the Grammy for Best Global Album in 2021.", "order": 2 },
+      { "axis": "place", "text": "I own a recording studio in Lagos called Spaceship Collective.", "order": 3 },
+      { "axis": "contemporary", "text": "I have collaborated with Beyoncé, Ed Sheeran, and Sir David Attenborough.", "order": 4 },
+      { "axis": "epithet", "text": "I call myself the African Giant and Odogwu, a title meaning Big Man in Igbo.", "order": 5 },
+      { "axis": "end", "text": "I am still in my prime, touring the world and carrying Afrobeats to every continent.", "order": 6 }
+    ]
+  },
+  {
+    "name": "Nnamdi Azikiwe",
+    "acceptedAnswers": ["azikiwe", "nnamdi azikiwe", "zik", "zík of africa"],
+    "category": "leader",
+    "era": "first republic",
+    "clues": [
+      { "axis": "origin", "text": "I was born in Zungeru, Northern Nigeria, in 1904 to Igbo parents.", "order": 1 },
+      { "axis": "work", "text": "I was the first President of Nigeria after independence in 1963.", "order": 2 },
+      { "axis": "place", "text": "The University of Nigeria, Nsukka, which I founded, now bears my name on its library.", "order": 3 },
+      { "axis": "contemporary", "text": "I led the independence struggle alongside Obafemi Awolowo and Ahmadu Bello.", "order": 4 },
+      { "axis": "epithet", "text": "I am known as Zik of Africa, a journalist turned statesman.", "order": 5 },
+      { "axis": "end", "text": "I died in Enugu in 1996 at the age of 91, leaving behind a legacy of pan-Africanism.", "order": 6 }
+    ]
+  },
+  {
+    "name": "Jay-Jay Okocha",
+    "acceptedAnswers": ["okocha", "jay-jay okocha", "augustine okocha", "jj okocha", "sojay"],
+    "category": "footballer",
+    "era": "contemporary",
+    "clues": [
+      { "axis": "origin", "text": "I was born in Enugu in 1973, the youngest of eight children.", "order": 1 },
+      { "axis": "work", "text": "I played for Paris Saint-Germain and Bolton Wanderers, dazzling fans with my skill.", "order": 2 },
+      { "axis": "place", "text": "I captained the Super Eagles at the 2004 Africa Cup of Nations in Tunisia.", "order": 3 },
+      { "axis": "contemporary", "text": "I was teammates with Kanu Nwankwo in the Nigerian Golden Generation.", "order": 4 },
+      { "axis": "epithet", "text": "Fans called me Sojay, coined from the words SOccer and JAY.", "order": 5 },
+      { "axis": "end", "text": "I am now a football ambassador and mentor to young Nigerian players.", "order": 6 }
+    ]
+  },
+  {
+    "name": "Funmilayo Ransome-Kuti",
+    "acceptedAnswers": ["funmilayo ransome kuti", "funmilayo", "fumilayo", "beyoncé's grandmother", "lioness of lisabi"],
+    "category": "leader",
+    "era": "colonial",
+    "clues": [
+      { "axis": "origin", "text": "I was born in Abeokuta in 1900, into a family of educators.", "order": 1 },
+      { "axis": "work", "text": "I led the Abeokuta Women's Union and fought against colonial taxation of women.", "order": 2 },
+      { "axis": "place", "text": "My home in Abeokuta became the headquarters of the Nigerian women's movement.", "order": 3 },
+      { "axis": "contemporary", "text": "I was the mother of Fela Kuti and the first woman to drive a car in Nigeria.", "order": 4 },
+      { "axis": "epithet", "text": "I am remembered as the Lioness of Lisabi for my fearless activism.", "order": 5 },
+      { "axis": "end", "text": "I died in 1978 from injuries sustained during a military raid on my son's compound.", "order": 6 }
+    ]
+  },
+  {
+    "name": "Obafemi Awolowo",
+    "acceptedAnswers": ["awolowo", "obafemi awolowo", "awo", "chief awolowo"],
+    "category": "regional_leader",
+    "era": "first republic",
+    "clues": [
+      { "axis": "origin", "text": "I was born in Ikenne, Ogun State, in 1909.", "order": 1 },
+      { "axis": "work", "text": "As Premier of the Western Region, I introduced free primary education in Nigeria.", "order": 2 },
+      { "axis": "place", "text": "The Obafemi Awolowo University in Ile-Ife bears my name, and I was its founding vision.", "order": 3 },
+      { "axis": "contemporary", "text": "I was the great rival and counterpart of Nnamdi Azikiwe and Ahmadu Bello.", "order": 4 },
+      { "axis": "epithet", "text": "I am known as Awo, a name that became synonymous with Yoruba political identity.", "order": 5 },
+      { "axis": "end", "text": "I died in 1987 at my home in Ikenne, and millions lined the streets for my funeral.", "order": 6 }
+    ]
+  },
+  {
+    "name": "Ahmadu Bello",
+    "acceptedAnswers": ["ahmadu bello", "sardauna", "sardauna of sokoto", "bello"],
+    "category": "regional_leader",
+    "era": "first republic",
+    "clues": [
+      { "axis": "origin", "text": "I was born in Sokoto in 1910, a descendant of Usman dan Fodio.", "order": 1 },
+      { "axis": "work", "text": "As Premier of the Northern Region, I was the most powerful politician in independent Nigeria's first decade.", "order": 2 },
+      { "axis": "place", "text": "The Ahmadu Bello University in Zaria, one of Africa's largest universities, carries my name.", "order": 3 },
+      { "axis": "contemporary", "text": "I governed the North alongside Awolowo in the West and Azikiwe in the East.", "order": 4 },
+      { "axis": "epithet", "text": "I held the traditional title Sardauna of Sokoto, a mark of my noble lineage.", "order": 5 },
+      { "axis": "end", "text": "I was assassinated in the 1966 coup, shot in my home alongside my wife.", "order": 6 }
+    ]
+  },
+  {
+    "name": "Tafawa Balewa",
+    "acceptedAnswers": ["tafawa balewa", "balewa", "abubakar tafawa balewa"],
+    "category": "leader",
+    "era": "first republic",
+    "clues": [
+      { "axis": "origin", "text": "I was born in Tafawa Balewa, a district in Bauchi State, in 1912.", "order": 1 },
+      { "axis": "work", "text": "I became the first and only Prime Minister of independent Nigeria.", "order": 2 },
+      { "axis": "place", "text": "I led the nation from Lagos, the capital, during Nigeria's early years as a republic.", "order": 3 },
+      { "axis": "contemporary", "text": "I worked closely with Ahmadu Bello, my mentor, who remained my senior in the North.", "order": 4 },
+      { "axis": "epithet", "text": "I was known as the Golden Voice of Africa for my eloquence on the world stage.", "order": 5 },
+      { "axis": "end", "text": "I was killed in the 1966 military coup, my body found on a road outside Lagos.", "order": 6 }
+    ]
+  },
+  {
+    "name": "Michael Okpara",
+    "acceptedAnswers": ["okpara", "michael okpara", "dr michael okpara"],
+    "category": "regional_leader",
+    "era": "first republic",
+    "clues": [
+      { "axis": "origin", "text": "I was born in Umuegwu, Okigwe, in present-day Imo State, in 1916.", "order": 1 },
+      { "axis": "work", "text": "As Premier of the Eastern Region, I transformed the region into an industrial powerhouse.", "order": 2 },
+      { "axis": "place", "text": "The Michael Okpara University of Agriculture in Umudike bears my name.", "order": 3 },
+      { "axis": "contemporary", "text": "I was a protégé of Nnamdi Azikiwe and led the NCNC after he became President.", "order": 4 },
+      { "axis": "epithet", "text": "I was known as the Architect of the Eastern Region for my ambitious development plans.", "order": 5 },
+      { "axis": "end", "text": "I went into exile after the civil war and returned in 1982 to a quiet life in Umuahia.", "order": 6 }
+    ]
+  },
+  {
+    "name": "Kaduna Nzeogwu",
+    "acceptedAnswers": ["kaduna nzeogwu", "nzeogwu", "major nzeogwu", "patrick nzeogwu"],
+    "category": "coup_plotter",
+    "era": "military era",
+    "clues": [
+      { "axis": "origin", "text": "I was born in Okpanam, Delta State, but grew up in Kaduna, which became my adopted name.", "order": 1 },
+      { "axis": "work", "text": "I planned and executed Nigeria's first military coup in January 1966.", "order": 2 },
+      { "axis": "place", "text": "I announced the coup from Radio Kaduna, declaring the end of the First Republic.", "order": 3 },
+      { "axis": "contemporary", "text": "I trained at Sandhurst alongside other young officers who would shape Nigeria's future.", "order": 4 },
+      { "axis": "epithet", "text": "I am remembered as the Ojikutu, the Vulture who struck at Nigeria's leaders.", "order": 5 },
+      { "axis": "end", "text": "I was killed in action near Nsukka in 1967 during the civil war I helped set in motion.", "order": 6 }
+    ]
+  },
+  {
+    "name": "Murtala Mohammed",
+    "acceptedAnswers": ["murtala", "murtala mohammed", "general murtala", "murtala ramat mohammed"],
+    "category": "coup_plotter",
+    "era": "military era",
+    "clues": [
+      { "axis": "origin", "text": "I was born in Kano in 1938, into a Hausa-Fulani family.", "order": 1 },
+      { "axis": "work", "text": "I became Nigeria's Head of State in a 1975 palace coup and ruled for only six months.", "order": 2 },
+      { "axis": "place", "text": "Lagos's international airport is named after me, the gateway for everyone who flies into the city.", "order": 3 },
+      { "axis": "contemporary", "text": "I served alongside Olusegun Obasanjo, who succeeded me after my death.", "order": 4 },
+      { "axis": "epithet", "text": "History remembers me as the Iron General for my swift, decisive leadership.", "order": 5 },
+      { "axis": "end", "text": "I was assassinated in a failed coup attempt in Lagos in 1976, my car riddled with bullets.", "order": 6 }
+    ]
+  },
+  {
+    "name": "Sani Abacha",
+    "acceptedAnswers": ["abacha", "sani abacha", "general abacha"],
+    "category": "coup_plotter",
+    "era": "military era",
+    "clues": [
+      { "axis": "origin", "text": "I was born in Kano in 1943, a Kanuri from the north-east.", "order": 1 },
+      { "axis": "work", "text": "I seized power in 1993 and ruled Nigeria with an iron fist for five years.", "order": 2 },
+      { "axis": "place", "text": "I governed from Aso Rock, the presidential villa in Abuja, which my regime completed.", "order": 3 },
+      { "axis": "contemporary", "text": "I imprisoned Olusegun Obasanjo for plotting against me, only for him to later become President.", "order": 4 },
+      { "axis": "epithet", "text": "My regime was known for its brutality and I was called the most corrupt leader in Nigerian history.", "order": 5 },
+      { "axis": "end", "text": "I died suddenly in 1998 at the age of 54, reportedly in the company of Indian prostitutes.", "order": 6 }
+    ]
+  },
+  {
+    "name": "Ibrahim Babangida",
+    "acceptedAnswers": ["babangida", "ibrahim babangida", "ibb", "maradona"],
+    "category": "coup_plotter",
+    "era": "military era",
+    "clues": [
+      { "axis": "origin", "text": "I was born in Minna, Niger State, in 1941.", "order": 1 },
+      { "axis": "work", "text": "I ruled Nigeria for eight years after seizing power in 1985, the longest-serving military ruler.", "order": 2 },
+      { "axis": "place", "text": "I built a new federal capital in Abuja, moving the seat of government from Lagos.", "order": 3 },
+      { "axis": "contemporary", "text": "I annulled the June 12, 1993 election that Moshood Abiola was poised to win.", "order": 4 },
+      { "axis": "epithet", "text": "I was nicknamed Maradona for my ability to dribble around political crises.", "order": 5 },
+      { "axis": "end", "text": "I handed over to an interim government in 1993 and have remained a kingmaker in Nigerian politics.", "order": 6 }
+    ]
+  },
+  {
+    "name": "Olusegun Obasanjo",
+    "acceptedAnswers": ["obasanjo", "olusegun obasanjo", "baba", "obasanjo"],
+    "category": "leader",
+    "era": "contemporary",
+    "clues": [
+      { "axis": "origin", "text": "I was born in Abeokuta, Ogun State, in 1937.", "order": 1 },
+      { "axis": "work", "text": "I was Nigeria's military Head of State and later its civilian President for eight years.", "order": 2 },
+      { "axis": "place", "text": "I own a farm in Otta where I retreated after leaving office, writing my memoirs.", "order": 3 },
+      { "axis": "contemporary", "text": "I was imprisoned by Sani Abacha and later released to become President in 1999.", "order": 4 },
+      { "axis": "epithet", "text": "I am known simply as Baba, the father of Nigeria's modern democracy.", "order": 5 },
+      { "axis": "end", "text": "I remain active in African diplomacy, serving as a special envoy and elder statesman.", "order": 6 }
+    ]
+  },
+  {
+    "name": "Goodluck Jonathan",
+    "acceptedAnswers": ["jonathan", "goodluck jonathan", "goodluck", "gej"],
+    "category": "leader",
+    "era": "contemporary",
+    "clues": [
+      { "axis": "origin", "text": "I was born in Otueke, Bayelsa State, in 1957, the son of a canoe carver.", "order": 1 },
+      { "axis": "work", "text": "I became President of Nigeria in 2010 and served until 2015.", "order": 2 },
+      { "axis": "place", "text": "I was the first President from the Niger Delta and took office in Aso Rock, Abuja.", "order": 3 },
+      { "axis": "contemporary", "text": "I was Vice President under Umaru Yar'Adua and assumed office when he died in 2010.", "order": 4 },
+      { "axis": "epithet", "text": "I am called the Accidental President because I was never elected to the top job initially.", "order": 5 },
+      { "axis": "end", "text": "I conceded defeat to Muhammadu Buhari in 2015 and handed over peacefully, a first for Nigeria.", "order": 6 }
+    ]
+  },
+  {
+    "name": "King Sunny Ade",
+    "acceptedAnswers": ["king sunny ade", "sunny ade", "sunday adeshina adeniyi", "ksa"],
+    "category": "musician",
+    "era": "military era",
+    "clues": [
+      { "axis": "origin", "text": "I was born in Ondo in 1946, into a royal family.", "order": 1 },
+      { "axis": "work", "text": "I pioneered a style of juju music that became the soundtrack of Nigerian high society.", "order": 2 },
+      { "axis": "place", "text": "I built a nightclub in Lagos called The Palace, where the elite gathered to hear me play.", "order": 3 },
+      { "axis": "contemporary", "text": "I took juju music global and inspired bands like the Police's Stewart Copeland.", "order": 4 },
+      { "axis": "epithet", "text": "I am called the King of Juju Music, a title I earned over six decades of performance.", "order": 5 },
+      { "axis": "end", "text": "At nearly 80, I still perform and record, preserving the juju tradition for new generations.", "order": 6 }
+    ]
+  },
+  {
+    "name": "2Baba",
+    "acceptedAnswers": ["2baba", "2face", "2face idibia", "innocent idibia", "tuface"],
+    "category": "musician",
+    "era": "contemporary",
+    "clues": [
+      { "axis": "origin", "text": "I was born in Jos in 1975, but my family roots are in Benue State.", "order": 1 },
+      { "axis": "work", "text": "My song African Queen became one of the most beloved love songs in African history.", "order": 2 },
+      { "axis": "place", "text": "I rose to fame in Lagos as a member of the Plantashun Boiz before going solo.", "order": 3 },
+      { "axis": "contemporary", "text": "I was a rival to fellow Nigerian musicians like D'banj and P-Square in the 2000s.", "order": 4 },
+      { "axis": "epithet", "text": "I was known as Tuface before I changed my stage name to 2Baba in 2014.", "order": 5 },
+      { "axis": "end", "text": "I remain active in music and philanthropy, advocating for peace and social justice.", "order": 6 }
+    ]
+  },
+  {
+    "name": "Wizkid",
+    "acceptedAnswers": ["wizkid", "starboy", "ayodeji balogun", "wiz"],
+    "category": "musician",
+    "era": "contemporary",
+    "weak": ["end"],
+    "clues": [
+      { "axis": "origin", "text": "I was born in Surulere, Lagos, in 1990, the last of six children.", "order": 1 },
+      { "axis": "work", "text": "My album Made in Lagos went global, and my song Essence became a worldwide hit.", "order": 2 },
+      { "axis": "place", "text": "I am a son of Surulere, a neighborhood in mainland Lagos that shaped my sound.", "order": 3 },
+      { "axis": "contemporary", "text": "I have collaborated with Drake, Beyoncé, and Justin Bieber, putting Afrobeats on the global map.", "order": 4 },
+      { "axis": "epithet", "text": "I call myself Starboy, and that name is now the brand of my record label.", "order": 5 },
+      { "axis": "end", "text": "I am still at the peak of my career, selling out arenas worldwide and mentoring new artists.", "order": 6 }
+    ]
+  },
+  {
+    "name": "Davido",
+    "acceptedAnswers": ["davido", "david adeleke", "davido adeleke", "30bg"],
+    "category": "musician",
+    "era": "contemporary",
+    "weak": ["end"],
+    "clues": [
+      { "axis": "origin", "text": "I was born in Atlanta, Georgia, in 1992, but moved to Lagos as a teenager.", "order": 1 },
+      { "axis": "work", "text": "My single Fall became the most-watched Nigerian music video on YouTube.", "order": 2 },
+      { "axis": "place", "text": "I own a mansion in Banana Island, Lagos, and my record label is based in Victoria Island.", "order": 3 },
+      { "axis": "contemporary", "text": "I have traded diss tracks with Wizkid, and our rivalry has defined Afrobeats for a decade.", "order": 4 },
+      { "axis": "epithet", "text": "I am known as OBO and Baddest, names I gave myself in my biggest songs.", "order": 5 },
+      { "axis": "end", "text": "I am at the height of my powers, headlining festivals and building a music empire.", "order": 6 }
+    ]
+  },
+  {
+    "name": "Rashidi Yekini",
+    "acceptedAnswers": ["yekini", "rashidi yekini", "rashidi"],
+    "category": "footballer",
+    "era": "contemporary",
+    "clues": [
+      { "axis": "origin", "text": "I was born in Kaduna in 1963, but my family roots are in Kwara State.", "order": 1 },
+      { "axis": "work", "text": "I scored Nigeria's first-ever World Cup goal in 1994, against Bulgaria.", "order": 2 },
+      { "axis": "place", "text": "I played my club football in Nigeria, Ivory Coast, Portugal, Greece, and Tunisia.", "order": 3 },
+      { "axis": "contemporary", "text": "I was the star striker of the Super Eagles alongside Jay-Jay Okocha and Kanu Nwankwo.", "order": 4 },
+      { "axis": "epithet", "text": "Fans called me Rubie, and my iconic celebration after scoring at the World Cup is unforgettable.", "order": 5 },
+      { "axis": "end", "text": "I died in 2012 in Ibadan after a battle with mental illness, mourned by a nation.", "order": 6 }
+    ]
+  },
+  {
+    "name": "Mikel Obi",
+    "acceptedAnswers": ["mikel", "mikel obi", "john obi mikel", "mikel john obi"],
+    "category": "footballer",
+    "era": "contemporary",
+    "clues": [
+      { "axis": "origin", "text": "I was born in Jos in 1987, into a family of six children.", "order": 1 },
+      { "axis": "work", "text": "I won the UEFA Champions League with Chelsea and played in two World Cups.", "order": 2 },
+      { "axis": "place", "text": "I spent a decade at Chelsea in London before finishing my career in the Middle East.", "order": 3 },
+      { "axis": "contemporary", "text": "My transfer from Lyn Oslo to Manchester United was hijacked by Chelsea in a famous dispute.", "order": 4 },
+      { "axis": "epithet", "text": "I was called the Hargreaves of Nigeria for my composed style in midfield.", "order": 5 },
+      { "axis": "end", "text": "I retired from football in 2024 and now work as a football executive and youth coach.", "order": 6 }
+    ]
+  },
+  {
+    "name": "Stephen Keshi",
+    "acceptedAnswers": ["keshi", "stephen keshi", "big boss"],
+    "category": "footballer",
+    "era": "contemporary",
+    "clues": [
+      { "axis": "origin", "text": "I was born in Azare, Bauchi State, in 1962, though my roots are in Delta State.", "order": 1 },
+      { "axis": "work", "text": "I captained the Nigerian national team and later coached them to win the Africa Cup of Nations.", "order": 2 },
+      { "axis": "place", "text": "I played club football in Belgium, France, and the United States.", "order": 3 },
+      { "axis": "contemporary", "text": "I was a teammate of Rashidi Yekini and later coached Kanu Nwankwo in the national team.", "order": 4 },
+      { "axis": "epithet", "text": "I was called the Big Boss for my commanding presence as both captain and coach.", "order": 5 },
+      { "axis": "end", "text": "I died suddenly in 2016 in Benin City from a heart attack, just months after my wife passed.", "order": 6 }
+    ]
+  },
+  {
+    "name": "Flora Nwapa",
+    "acceptedAnswers": ["flora nwapa", "nwapa", "flora nwanzuruahu nwapa"],
+    "category": "writer",
+    "era": "first republic",
+    "clues": [
+      { "axis": "origin", "text": "I was born in Oguta, Imo State, in 1931, into a large family.", "order": 1 },
+      { "axis": "work", "text": "I published Efuru in 1966, the first English-language novel by a Nigerian woman.", "order": 2 },
+      { "axis": "place", "text": "I taught at the University of Lagos and later founded my own publishing house in Enugu.", "order": 3 },
+      { "axis": "contemporary", "text": "I was encouraged to write by Chinua Achebe, who read my manuscript while I was at university.", "order": 4 },
+      { "axis": "epithet", "text": "I am called the Mother of African Women's Literature for my pioneering work.", "order": 5 },
+      { "axis": "end", "text": "I died in Enugu in 1993 at the age of 62, my legacy as a literary pioneer secure.", "order": 6 }
+    ]
+  },
+  {
+    "name": "Ben Okri",
+    "acceptedAnswers": ["ben okri", "okri", "ben"],
+    "category": "writer",
+    "era": "contemporary",
+    "weak": ["place"],
+    "clues": [
+      { "axis": "origin", "text": "I was born in Minna, Niger State, in 1959, but spent my childhood in London.", "order": 1 },
+      { "axis": "work", "text": "I won the Booker Prize for The Famished Road, a novel that blends reality with the spirit world.", "order": 2 },
+      { "axis": "place", "text": "I return often to Nigeria, and my writing is deeply rooted in the country's oral traditions.", "order": 3 },
+      { "axis": "contemporary", "text": "I was a contemporary of Wole Soyinka and Chinua Achebe, who paved the way for my generation.", "order": 4 },
+      { "axis": "epithet", "text": "I have been called the most imaginative of Africa's writers for my magical realism.", "order": 5 },
+      { "axis": "end", "text": "I continue to write poetry, novels, and essays from my base in London.", "order": 6 }
+    ]
+  },
+  {
+    "name": "Ken Saro-Wiwa",
+    "acceptedAnswers": ["saro-wiwa", "ken saro-wiwa", "ken", "ken saro wiwa"],
+    "category": "writer",
+    "era": "military era",
+    "clues": [
+      { "axis": "origin", "text": "I was born in Bori, Rivers State, in 1941, into the Ogoni people.", "order": 1 },
+      { "axis": "work", "text": "I wrote the sitcom Basi and Company, a television show that entertained millions of Nigerians.", "order": 2 },
+      { "axis": "place", "text": "I led the Ogoni struggle against oil companies in the Niger Delta, my homeland.", "order": 3 },
+      { "axis": "contemporary", "text": "I faced the military regime of Sani Abacha, who saw my activism as a threat.", "order": 4 },
+      { "axis": "epithet", "text": "History remembers me as a martyr for the Niger Delta and for environmental justice.", "order": 5 },
+      { "axis": "end", "text": "I was executed by hanging in 1995 alongside eight other Ogoni activists.", "order": 6 }
+    ]
+  }
+]
