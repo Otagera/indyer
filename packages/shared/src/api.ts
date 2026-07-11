@@ -47,6 +47,9 @@ export interface TodayResponse {
   guesses?: Guess[];
   cluesShown?: number;
   subjectName?: string;
+  category?: string;
+  allClues?: ClueItem[];
+  roster?: string[];
 }
 
 export interface StartRequest {

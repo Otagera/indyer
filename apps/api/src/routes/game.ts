@@ -47,6 +47,9 @@ game.get("/today", async (c) => {
   const pid = c.get("playerId");
   const { issueNo } = await resolveToday(db);
 
+  const rosterRows = await db.select({ name: subjects.name }).from(subjects).where(eq(subjects.active, true));
+  const roster = rosterRows.map((r) => r.name);
+
   const [gs] = await db
     .select()
     .from(gameStates)
@@ -60,6 +63,7 @@ game.get("/today", async (c) => {
       status: "new",
       totalClues: 6,
       availableModes: ["easy", "normal", "hard"],
+      roster,
     };
     return c.json(response);
   }
@@ -67,24 +71,19 @@ game.get("/today", async (c) => {
   const budget = getClueBudget(gs.mode as Mode);
   const cluesRevealed = clampCluesRevealed(gs.cluesRevealed, budget);
 
-  const currentClues: ClueItem[] = [];
+  const [puzzle] = await db
+    .select({ subjectId: puzzles.subjectId })
+    .from(puzzles)
+    .where(eq(puzzles.issueNo, issueNo))
+    .limit(1);
 
-  if (cluesRevealed > 0) {
-    const [puzzle] = await db
-      .select({ subjectId: puzzles.subjectId })
-      .from(puzzles)
-      .where(eq(puzzles.issueNo, issueNo))
-      .limit(1);
+  const allClueRows = await db
+    .select({ number: clues.order, text: clues.text, axis: clues.axis })
+    .from(clues)
+    .where(eq(clues.subjectId, puzzle.subjectId))
+    .orderBy(clues.order);
 
-    const clueRows = await db
-      .select({ number: clues.order, text: clues.text, axis: clues.axis })
-      .from(clues)
-      .where(eq(clues.subjectId, puzzle.subjectId))
-      .orderBy(clues.order)
-      .limit(cluesRevealed);
-
-    currentClues.push(...clueRows);
-  }
+  const currentClues = allClueRows.slice(0, cluesRevealed);
 
   const guesses = gs.guesses as { text: string; correct: boolean; timestamp: string }[];
   const status = gs.solved ? "solved"
@@ -100,20 +99,18 @@ game.get("/today", async (c) => {
     clues: currentClues,
     guesses,
     cluesShown: cluesRevealed,
+    roster,
   };
 
   if (status === "solved" || status === "failed") {
-    const [puzzle] = await db
-      .select({ subjectId: puzzles.subjectId })
-      .from(puzzles)
-      .where(eq(puzzles.issueNo, issueNo))
-      .limit(1);
     const [subject] = await db
-      .select({ name: subjects.name })
+      .select({ name: subjects.name, category: subjects.category })
       .from(subjects)
       .where(eq(subjects.id, puzzle.subjectId))
       .limit(1);
     response.subjectName = subject.name;
+    response.category = subject.category;
+    response.allClues = allClueRows;
   }
 
   return c.json(response);
