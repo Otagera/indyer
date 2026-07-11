@@ -49,10 +49,13 @@ export const gameStates = pgTable("game_states", {
   issueNo: integer("issue_no").notNull(),
   mode: varchar("mode", { length: 10 }),
   guesses: jsonb("guesses").default([]).notNull(),
+  cluesRevealed: integer("clues_revealed").notNull().default(0),
   solved: boolean("solved").default(false).notNull(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
   updatedAt: timestamp("updated_at").defaultNow().notNull(),
-});
+}, (t) => ({
+  uniquePlayerIssue: uniqueIndex("uq_game_states_player_issue").on(t.playerId, t.issueNo),
+}));
 
 export const playerIdentities = pgTable("player_identities", {
   playerId: varchar("player_id", { length: 36 }).primaryKey(),

@@ -3,7 +3,7 @@ import { eq } from "drizzle-orm";
 import { getClient } from "../db/client.js";
 import { subjects, clues, puzzles } from "@indyer/db/schema";
 import { getSubjectForDate, getIssueNo } from "@indyer/db/puzzle-selector";
-import type { TodayPuzzle } from "@indyer/shared";
+
 
 const puzzle = new Hono();
 
@@ -48,7 +48,7 @@ puzzle.get("/today", async (c) => {
     .where(eq(clues.subjectId, subjectId))
     .orderBy(clues.order);
 
-  const response: TodayPuzzle = {
+  const response = {
     issueNo,
     subject,
     clues: clueRows,

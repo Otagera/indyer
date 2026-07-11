@@ -8,6 +8,7 @@ import { requestLogger } from "./middleware/logger.js";
 import { identity } from "./middleware/identity.js";
 import { health } from "./routes/health.js";
 import { puzzle } from "./routes/puzzle.js";
+import { game } from "./routes/game.js";
 import { auth } from "./routes/auth.js";
 
 const app = new Hono();
@@ -20,6 +21,7 @@ app.onError(errorHandler);
 
 app.route("/health", health);
 app.route("/puzzle", puzzle);
+app.route("/game", game);
 app.route("/auth", auth);
 
 app.get("/", (c) => {
