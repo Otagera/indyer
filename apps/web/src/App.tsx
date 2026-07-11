@@ -1,8 +1,18 @@
-import { HealthCheck } from "./components/HealthCheck";
+import { useEffect } from "react";
 import { Masthead } from "./components/Masthead";
 import { PaperGrain } from "./components/PaperGrain";
+import { ModeSelect } from "./components/ModeSelect";
+import { GamePlay } from "./components/GamePlay";
+import { GameOver } from "./components/GameOver";
+import { useGameStore } from "./stores/game";
 
 export default function App() {
+  const { screen, load } = useGameStore();
+
+  useEffect(() => {
+    load();
+  }, [load]);
+
   return (
     <div
       className="min-h-screen bg-app-bg flex flex-col items-center justify-center p-4 relative"
@@ -16,12 +26,31 @@ export default function App() {
       }}
     >
       <PaperGrain />
-      <main className="w-full max-w-[380px] bg-paper shadow-card p-6 relative">
+      <main className="w-full max-w-[380px] bg-paper shadow-card p-6 relative min-h-[300px]">
         <Masthead size="compact" />
-        <p className="text-text-tertiary text-center text-sm mt-4 mb-6">
-          Daily guess-the-name puzzle
-        </p>
-        <HealthCheck />
+        {screen === "loading" && (
+          <p className="font-body text-text-faint text-center text-sm mt-8">
+            Loading today&rsquo;s issue...
+          </p>
+        )}
+        {screen === "mode-select" && (
+          <>
+            <p className="text-text-tertiary text-center text-sm mt-4 mb-6 font-body italic">
+              Daily guess-the-name puzzle
+            </p>
+            <ModeSelect />
+          </>
+        )}
+        {screen === "playing" && (
+          <div className="mt-4">
+            <GamePlay />
+          </div>
+        )}
+        {(screen === "solved" || screen === "failed") && (
+          <div className="mt-4">
+            <GameOver />
+          </div>
+        )}
       </main>
     </div>
   );
