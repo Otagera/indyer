@@ -14,7 +14,8 @@ const categoryLabels: Record<string, string> = {
 };
 
 export function GameOver() {
-  const { screen, clues, allClues, guesses, mode, issueNo, answer, category } = useGameStore();
+  const { screen, clues, allClues, guesses, mode, issueNo, answer, category, goHome } =
+    useGameStore();
   const solved = screen === "solved";
   const used = guesses.length;
   const correctGuess = guesses.find((g) => g.correct);
@@ -102,10 +103,10 @@ export function GameOver() {
 
       <button
         type="button"
-        onClick={() => window.location.reload()}
+        onClick={goHome}
         className="w-full font-shouty uppercase tracking-[0.08em] text-sm py-3 bg-ink text-paper shadow-[4px_4px_0_#141210] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all"
       >
-        New Issue Tomorrow
+        Back to Front Page
       </button>
     </>
   );

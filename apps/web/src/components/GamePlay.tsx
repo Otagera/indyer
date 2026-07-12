@@ -7,7 +7,7 @@ import { useGameStore } from "../stores/game";
 
 export function GamePlay() {
   const [value, setValue] = useState("");
-  const { clues, guesses, mode, totalClues, submitGuess, error, roster } = useGameStore();
+  const { clues, guesses, mode, totalClues, submitGuess, error } = useGameStore();
   const used = guesses.length;
   const guessesLeft = 6 - used;
   const modeBudget = mode ? MODE_CLUE_COUNTS[mode] : 6;
@@ -70,7 +70,6 @@ export function GamePlay() {
           onSubmit={handleSubmit}
           disabled={used >= 6}
           remaining={guessesLeft}
-          suggestions={roster}
         />
       </div>
     </>

@@ -4,6 +4,7 @@ import { PaperGrain } from "./components/PaperGrain";
 import { ModeSelect } from "./components/ModeSelect";
 import { GamePlay } from "./components/GamePlay";
 import { GameOver } from "./components/GameOver";
+import { FrontPage } from "./components/FrontPage";
 import { useGameStore } from "./stores/game";
 
 export default function App() {
@@ -51,6 +52,7 @@ export default function App() {
             <GameOver />
           </div>
         )}
+        {screen === "home" && <FrontPage />}
       </main>
     </div>
   );

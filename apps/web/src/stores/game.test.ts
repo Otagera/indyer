@@ -19,7 +19,6 @@ beforeEach(() => {
     answer: null,
     category: null,
     allClues: [],
-    roster: [],
   });
 });
 
@@ -34,7 +33,6 @@ describe("game store", () => {
           status: "new",
           totalClues: 6,
           availableModes: ["easy", "normal", "hard"],
-          roster: ["Subject A", "Subject B"],
         }),
       });
 
@@ -56,7 +54,6 @@ describe("game store", () => {
           clues: [{ number: 1, text: "First clue", axis: "origin" }],
           guesses: [{ text: "wrong", correct: false, timestamp: new Date().toISOString() }],
           cluesShown: 1,
-          roster: ["Subject A"],
         }),
       });
 
@@ -86,7 +83,6 @@ describe("game store", () => {
             { number: 1, text: "First clue", axis: "origin" },
             { number: 2, text: "Second clue", axis: "work" },
           ],
-          roster: ["Test Subject"],
         }),
       });
 
@@ -116,7 +112,6 @@ describe("game store", () => {
           subjectName: "Test Subject",
           category: "leader",
           allClues: [],
-          roster: [],
         }),
       });
 

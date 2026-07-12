@@ -21,7 +21,6 @@ describe("GamePlay", () => {
       totalClues: 6,
       submitGuess: vi.fn(),
       error: null,
-      roster: [],
     });
 
     render(<GamePlay />);
@@ -39,7 +38,6 @@ describe("GamePlay", () => {
       totalClues: 6,
       submitGuess: vi.fn(),
       error: null,
-      roster: [],
     });
 
     render(<GamePlay />);
@@ -62,7 +60,6 @@ describe("GamePlay", () => {
       totalClues: 6,
       submitGuess: vi.fn(),
       error: null,
-      roster: [],
     });
 
     render(<GamePlay />);
@@ -81,7 +78,6 @@ describe("GamePlay", () => {
       totalClues: 6,
       submitGuess: vi.fn(),
       error: null,
-      roster: [],
     });
 
     render(<GamePlay />);
@@ -96,7 +92,6 @@ describe("GamePlay", () => {
       totalClues: 6,
       submitGuess: vi.fn(),
       error: null,
-      roster: [],
     });
 
     render(<GamePlay />);
@@ -112,7 +107,6 @@ describe("GamePlay", () => {
       totalClues: 6,
       submitGuess,
       error: null,
-      roster: [],
     });
 
     render(<GamePlay />);
@@ -130,7 +124,6 @@ describe("GamePlay", () => {
       totalClues: 6,
       submitGuess: vi.fn(),
       error: "Game not started",
-      roster: [],
     });
 
     render(<GamePlay />);

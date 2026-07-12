@@ -58,9 +58,6 @@ game.get("/today", async (c) => {
   const pid = c.get("playerId");
   const { issueNo } = await resolveToday(db);
 
-  const rosterRows = await db.select({ name: subjects.name }).from(subjects).where(eq(subjects.active, true));
-  const roster = rosterRows.map((r) => r.name);
-
   const [gs] = await db
     .select()
     .from(gameStates)
@@ -74,7 +71,6 @@ game.get("/today", async (c) => {
       status: "new",
       totalClues: 6,
       availableModes: ["easy", "normal", "hard"],
-      roster,
     };
     return c.json(response);
   }
@@ -110,7 +106,6 @@ game.get("/today", async (c) => {
     clues: currentClues,
     guesses,
     cluesShown: cluesRevealed,
-    roster,
   };
 
   if (status === "solved" || status === "failed") {

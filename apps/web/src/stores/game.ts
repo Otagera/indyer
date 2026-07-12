@@ -8,7 +8,7 @@ import type {
 import { MODE_CLUE_COUNTS } from "@indyer/shared";
 import { create } from "zustand";
 
-export type Screen = "loading" | "mode-select" | "playing" | "solved" | "failed";
+export type Screen = "loading" | "mode-select" | "playing" | "solved" | "failed" | "home";
 
 interface GuessEntry {
   text: string;
@@ -29,11 +29,12 @@ interface GameState {
   answer: string | null;
   category: string | null;
   allClues: ClueItem[];
-  roster: string[];
 
   load: () => Promise<void>;
   startGame: (mode: Mode) => Promise<void>;
   submitGuess: (text: string) => Promise<GuessResponse | null>;
+  goHome: () => void;
+  viewResults: () => void;
 }
 
 export const useGameStore = create<GameState>((set, get) => ({
@@ -49,7 +50,6 @@ export const useGameStore = create<GameState>((set, get) => ({
   answer: null,
   category: null,
   allClues: [],
-  roster: [],
 
   load: async () => {
     set({ screen: "loading", error: null });
@@ -59,7 +59,7 @@ export const useGameStore = create<GameState>((set, get) => ({
       const today: TodayResponse = await res.json();
 
       if (today.status === "new") {
-        set({ screen: "mode-select", today, issueNo: today.issueNo, totalClues: today.totalClues, roster: today.roster ?? [] });
+        set({ screen: "mode-select", today, issueNo: today.issueNo, totalClues: today.totalClues });
       } else {
         set({
           screen: today.status === "solved" ? "solved" : today.status === "failed" ? "failed" : "playing",
@@ -73,7 +73,6 @@ export const useGameStore = create<GameState>((set, get) => ({
           answer: today.subjectName ?? null,
           category: today.category ?? null,
           allClues: today.allClues ?? [],
-          roster: today.roster ?? [],
         });
       }
     } catch (e) {
@@ -157,5 +156,12 @@ export const useGameStore = create<GameState>((set, get) => ({
       set({ error: (e as Error).message });
       return null;
     }
+  },
+
+  goHome: () => set({ screen: "home" }),
+
+  viewResults: () => {
+    const solved = get().guesses.some((g) => g.correct);
+    set({ screen: solved ? "solved" : "failed" });
   },
 }));
