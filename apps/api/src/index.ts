@@ -14,7 +14,7 @@ import { share } from "./routes/share.js";
 
 const app = new Hono();
 
-app.use("*", cors({ origin: "http://localhost:5173", credentials: true }));
+app.use("*", cors({ origin: config.corsOrigin, credentials: true }));
 app.use("*", requestLogger);
 app.use("*", identity);
 

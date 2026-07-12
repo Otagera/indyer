@@ -40,7 +40,7 @@ services:
     depends_on:
       - api
     environment:
-      - VITE_API_URL=https://indyer-api.otagera.xyz
+      - API_PROXY_TARGET=http://api:3001
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.indyer-client.rule=Host(`indyer.otagera.xyz`)"

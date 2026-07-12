@@ -14,8 +14,8 @@ EXPOSE 3001
 CMD ["pnpm", "--filter", "@indyer/api", "dev"]
 
 FROM base AS client
-ARG VITE_API_URL
-ENV VITE_API_URL=${VITE_API_URL}
 RUN pnpm --filter @indyer/web build
 EXPOSE 5173
-CMD ["pnpm", "--filter", "@indyer/web", "preview"]
+# "start" runs vite preview with --host --port 5173; bare "preview" binds
+# localhost:4173 only, which Traefik (expecting 5173) answers with a 504
+CMD ["pnpm", "--filter", "@indyer/web", "start"]

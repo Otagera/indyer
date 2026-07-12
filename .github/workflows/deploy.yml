@@ -39,8 +39,6 @@ jobs:
           target: client
           push: true
           tags: ${{ env.IMAGE_CLIENT }}:latest
-          build-args: |
-            VITE_API_URL=https://indyer-api.otagera.xyz
 
       - name: Trigger Coolify deployment
         run: |
