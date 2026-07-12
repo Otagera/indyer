@@ -22,15 +22,6 @@ services:
       NODE_ENV: production
       PORT: 3001
       CORS_ORIGIN: https://indyer.otagera.xyz
-    ports:
-      - "3001:3001"
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.indyer-api.rule=Host(`indyer-api.otagera.xyz`)"
-      - "traefik.http.routers.indyer-api.entrypoints=https"
-      - "traefik.http.routers.indyer-api.tls=true"
-      - "traefik.http.routers.indyer-api.tls.certresolver=letsencrypt"
-      - "traefik.http.services.indyer-api.loadbalancer.server.port=3001"
     networks:
       - indyer
 
