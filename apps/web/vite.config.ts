@@ -21,6 +21,7 @@ export default defineConfig({
   preview: {
     host: true,
     port: 5173,
+    allowedHosts: ["indyer.otagera.xyz"],
     proxy: apiProxy,
   },
 });
