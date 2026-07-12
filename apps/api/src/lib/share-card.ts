@@ -45,16 +45,16 @@ export function generateShareCardSvg(data: CardData): string {
     )
     .join("\n");
 
+  // No SVG filter effects here: feTurbulence hangs resvg.render() indefinitely (resvg-js 2.6.2, macOS arm64)
   return `<svg xmlns="http://www.w3.org/2000/svg" width="600" height="315" viewBox="0 0 600 315">
   <defs>
-    <filter id="grain" x="0" y="0" width="600" height="315">
-      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" result="noise"/>
-      <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.04 0" in="noise" result="coloredNoise"/>
-      <feBlend in="SourceGraphic" in2="coloredNoise" mode="multiply"/>
-    </filter>
+    <radialGradient id="paper" cx="50%" cy="45%" r="75%">
+      <stop offset="0%" stop-color="#f4efe6"/>
+      <stop offset="100%" stop-color="#ece5d6"/>
+    </radialGradient>
   </defs>
 
-  <rect width="600" height="315" fill="#f2ede4" filter="url(#grain)"/>
+  <rect width="600" height="315" fill="url(#paper)"/>
   <rect x="8" y="8" width="584" height="299" fill="none" stroke="#d4c8a8" stroke-width="0.5"/>
 
   <text x="300" y="50" text-anchor="middle" font-family="'Playfair Display', Georgia, serif" font-size="22" font-weight="700" fill="#2a2418" letter-spacing="4">THE NEW HERALD</text>

@@ -1,21 +1,46 @@
-const PLAYFAIR_URL = "https://fonts.gstatic.com/s/playfairdisplay/v37/nuFvD-vYSZviVYUb_rj3ij__anPXJzDwcbmjWBN2PKebunDXbtM.woff";
-const DM_SANS_URL = "https://fonts.gstatic.com/s/dmsans/v15/rP2Yp2ywxg089UriI5-g4vlH9VoD8Cmcqbu0-K6z9Wg.woff";
+const GOOGLE_FONTS_CSS = "https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans&display=swap";
 
-let playfairData: ArrayBuffer | null = null;
-let dmSansData: ArrayBuffer | null = null;
+// UA without woff2 support so Google serves TTF — resvg's fontdb cannot parse woff2.
+const FONT_FETCH_UA = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36";
 
-async function fetchFont(url: string): Promise<ArrayBuffer> {
-  const res = await fetch(url);
-  if (!res.ok) throw new Error(`Failed to fetch font: ${res.status}`);
-  return res.arrayBuffer();
+let playfairData: Buffer | null = null;
+let dmSansData: Buffer | null = null;
+
+async function fetchUrl(url: string): Promise<Response> {
+  return fetch(url, {
+    headers: { "User-Agent": FONT_FETCH_UA },
+  });
 }
 
-export async function getFonts(): Promise<{ playfair: ArrayBuffer; dmSans: ArrayBuffer }> {
-  if (!playfairData) {
-    playfairData = await fetchFont(PLAYFAIR_URL);
-  }
-  if (!dmSansData) {
-    dmSansData = await fetchFont(DM_SANS_URL);
+async function fetchFont(url: string): Promise<Buffer> {
+  const res = await fetchUrl(url);
+  if (!res.ok) throw new Error(`Failed to fetch font: ${res.status}`);
+  return Buffer.from(await res.arrayBuffer());
+}
+
+export function extractFontUrl(css: string, family: string): string {
+  const familyRe = new RegExp(`font-family:\\s*['"]?${family}['"]?\\s*;`);
+  const blocks = css.split("@font-face");
+  const matching = blocks.filter((block) => familyRe.test(block));
+  if (matching.length === 0) throw new Error(`No @font-face block for ${family}`);
+  // TTF CSS has no unicode-range subsets; woff2 CSS does — prefer the latin subset there.
+  const block = matching.find((b) => b.includes("latin")) ?? matching[0];
+  const match = block.match(/url\((['"]?)([^)'"]+)\1\)/);
+  if (!match) throw new Error(`No font URL in @font-face block for ${family}`);
+  return match[2];
+}
+
+export async function getFonts(): Promise<{ playfair: Buffer; dmSans: Buffer }> {
+  if (!playfairData || !dmSansData) {
+    const res = await fetchUrl(GOOGLE_FONTS_CSS);
+    if (!res.ok) throw new Error(`Failed to fetch Google Fonts CSS: ${res.status}`);
+    const css = await res.text();
+    const [pf, ds] = await Promise.all([
+      fetchFont(extractFontUrl(css, "Playfair Display")),
+      fetchFont(extractFontUrl(css, "DM Sans")),
+    ]);
+    playfairData = pf;
+    dmSansData = ds;
   }
   return { playfair: playfairData, dmSans: dmSansData };
 }

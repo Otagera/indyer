@@ -1,11 +1,12 @@
 import { Hono } from "hono";
 import { eq, and } from "drizzle-orm";
 import { getClient } from "../db/client.js";
+import { getFonts } from "../lib/fonts.js";
 import { generateShareCardSvg } from "../lib/share-card.js";
 import { subjects, clues, puzzles, gameStates } from "@indyer/db/schema";
 import { getSubjectForDate, getIssueNo } from "@indyer/db/puzzle-selector";
 import type { Mode } from "@indyer/shared";
-import { Resvg } from "@resvg/resvg-js";
+import { Resvg, type ResvgRenderOptions } from "@resvg/resvg-js";
 
 const share = new Hono();
 
@@ -61,16 +62,27 @@ share.get("/card", async (c) => {
     clueText,
   });
 
-  const resvg = new Resvg(svg, {
-    fitTo: { mode: "width", value: 1200 },
-  });
-  const png = resvg.render();
-  const pngBuffer = png.asPng();
+  const fonts = await getFonts();
+  try {
+    const resvg = new Resvg(svg, {
+      fitTo: { mode: "width", value: 1200 },
+      font: {
+        loadSystemFonts: false,
+        // fontBuffers is supported by the 2.6.2 native binary but missing from its .d.ts
+        fontBuffers: [fonts.playfair, fonts.dmSans],
+      } as ResvgRenderOptions["font"],
+    });
+    const png = resvg.render();
+    const pngBuffer = png.asPng();
 
-  return c.newResponse(new Uint8Array(pngBuffer), 200, {
-    "Content-Type": "image/png",
-    "Cache-Control": "public, max-age=60",
-  });
+    return c.newResponse(new Uint8Array(pngBuffer), 200, {
+      "Content-Type": "image/png",
+      "Cache-Control": "public, max-age=60",
+    });
+  } catch (e) {
+    console.error("Share card render error:", e);
+    return c.json({ error: "Failed to render share card", code: "RENDER_ERROR" }, 500);
+  }
 });
 
 export { share };
