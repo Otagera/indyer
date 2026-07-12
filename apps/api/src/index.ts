@@ -3,14 +3,13 @@ import { Hono } from "hono";
 import { cors } from "hono/cors";
 import { config } from "./config.js";
 import { createClient } from "./db/client.js";
-import { errorHandler } from "./middleware/error.js";
-import { requestLogger } from "./middleware/logger.js";
-import { identity } from "./middleware/identity.js";
 import { warmFonts } from "./lib/fonts.js";
-import { health } from "./routes/health.js";
-import { puzzle } from "./routes/puzzle.js";
-import { game } from "./routes/game.js";
+import { errorHandler } from "./middleware/error.js";
+import { identity } from "./middleware/identity.js";
+import { requestLogger } from "./middleware/logger.js";
 import { auth } from "./routes/auth.js";
+import { game } from "./routes/game.js";
+import { health } from "./routes/health.js";
 import { share } from "./routes/share.js";
 
 const app = new Hono();
@@ -22,7 +21,6 @@ app.use("*", identity);
 app.onError(errorHandler);
 
 app.route("/health", health);
-app.route("/puzzle", puzzle);
 app.route("/game", game);
 app.route("/auth", auth);
 app.route("/share", share);

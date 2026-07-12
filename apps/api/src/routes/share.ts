@@ -1,12 +1,12 @@
+import { getIssueNo, getSubjectForDate } from "@indyer/db/puzzle-selector";
+import { clues, gameStates, puzzles, subjects } from "@indyer/db/schema";
+import type { Mode } from "@indyer/shared";
+import { Resvg, type ResvgRenderOptions } from "@resvg/resvg-js";
+import { and, eq } from "drizzle-orm";
 import { Hono } from "hono";
-import { eq, and } from "drizzle-orm";
 import { getClient } from "../db/client.js";
 import { getFonts } from "../lib/fonts.js";
 import { generateShareCardSvg } from "../lib/share-card.js";
-import { subjects, clues, puzzles, gameStates } from "@indyer/db/schema";
-import { getSubjectForDate, getIssueNo } from "@indyer/db/puzzle-selector";
-import type { Mode } from "@indyer/shared";
-import { Resvg, type ResvgRenderOptions } from "@resvg/resvg-js";
 
 const share = new Hono();
 
@@ -69,7 +69,7 @@ share.get("/card", async (c) => {
       font: {
         loadSystemFonts: false,
         // fontBuffers is supported by the 2.6.2 native binary but missing from its .d.ts
-        fontBuffers: [fonts.playfair, fonts.dmSans],
+        fontBuffers: [fonts.playfair, fonts.dmSans, fonts.dmSansBold],
       } as ResvgRenderOptions["font"],
     });
     const png = resvg.render();

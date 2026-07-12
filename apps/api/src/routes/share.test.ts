@@ -1,5 +1,5 @@
-import { describe, it, expect, vi, beforeEach } from "vitest";
 import { Hono } from "hono";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 import { share } from "./share.js";
 
 vi.mock("../db/client.js", () => ({
@@ -13,6 +13,14 @@ vi.mock("@indyer/db/puzzle-selector", () => ({
 
 vi.mock("../lib/share-card.js", () => ({
   generateShareCardSvg: vi.fn(() => '<svg xmlns="http://www.w3.org/2000/svg"></svg>'),
+}));
+
+vi.mock("../lib/fonts.js", () => ({
+  getFonts: vi.fn(async () => ({
+    playfair: Buffer.from("fake-font"),
+    dmSans: Buffer.from("fake-font"),
+    dmSansBold: Buffer.from("fake-font"),
+  })),
 }));
 
 import { getClient } from "../db/client.js";
@@ -38,7 +46,13 @@ function tableName(table: any): string {
 function mockDb(data: TableData) {
   function makeChain(rows: any[]) {
     const then = (resolve: (v: any) => void) => resolve(rows);
-    const chain: any = { then, limit: (n: number) => makeChain(rows.slice(0, n)), offset: () => makeChain(rows), orderBy: () => makeChain(rows), where: () => makeChain(rows) };
+    const chain: any = {
+      then,
+      limit: (n: number) => makeChain(rows.slice(0, n)),
+      offset: () => makeChain(rows),
+      orderBy: () => makeChain(rows),
+      where: () => makeChain(rows),
+    };
     return chain;
   }
 
@@ -88,7 +102,17 @@ describe("GET /share/card", () => {
   it("returns PNG image when game state exists", async () => {
     const app = createApp({
       subjects: [{ id: 1, name: "Test Subject", active: true }],
-      game_states: [{ id: 1, playerId: "test-player-123", issueNo: 42, mode: "easy", guesses: [{ text: "guess", correct: false, timestamp: new Date().toISOString() }], cluesRevealed: 1, solved: false }],
+      game_states: [
+        {
+          id: 1,
+          playerId: "test-player-123",
+          issueNo: 42,
+          mode: "easy",
+          guesses: [{ text: "guess", correct: false, timestamp: new Date().toISOString() }],
+          cluesRevealed: 1,
+          solved: false,
+        },
+      ],
       puzzles: [{ id: 1, issueNo: 42, subjectId: 1 }],
       clues: [{ text: "First clue text", order: 1 }],
     });

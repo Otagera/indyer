@@ -1,12 +1,18 @@
 import { createClient } from "./client.ts";
-import { subjects, clues } from "./schema.ts";
 import roster from "./roster.json" with { type: "json" };
+import { clues, puzzles, subjects } from "./schema.ts";
 
 const dbUrl = process.env.DATABASE_URL ?? "postgres://localhost:5432/indyer";
 const db = createClient(dbUrl);
 
 async function seed() {
   console.log("Seeding database...\n");
+
+  // Idempotent: wipe roster tables (FK order) so reruns don't duplicate subjects
+  await db.delete(clues);
+  await db.delete(puzzles);
+  await db.delete(subjects);
+  console.log("  cleared clues, puzzles, subjects\n");
 
   for (const entry of roster) {
     if (entry.weak && entry.weak.length > 0) {
