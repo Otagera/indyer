@@ -6,6 +6,17 @@ const dbUrl = process.env.DATABASE_URL ?? "postgres://localhost:5432/indyer";
 const db = createClient(dbUrl);
 
 async function seed() {
+  // Boot-time guard: with SEED_IF_EMPTY set, never touch a database that
+  // already has a roster — a full seed wipes puzzles and re-rolls today's
+  // subject under live players
+  if (process.env.SEED_IF_EMPTY) {
+    const existing = await db.select({ id: subjects.id }).from(subjects).limit(1);
+    if (existing.length > 0) {
+      console.log("Roster already present — skipping seed (SEED_IF_EMPTY)");
+      process.exit(0);
+    }
+  }
+
   console.log("Seeding database...\n");
 
   // Idempotent: wipe roster tables (FK order) so reruns don't duplicate subjects

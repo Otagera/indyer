@@ -11,7 +11,9 @@ COPY . .
 
 FROM base AS api
 EXPOSE 3001
-CMD ["pnpm", "--filter", "@indyer/api", "dev"]
+# Migrate on every boot (drizzle tracks applied migrations); seed only into
+# an empty database — a full seed wipes puzzles mid-day for live players
+CMD ["sh", "-c", "pnpm --filter @indyer/db db:migrate && SEED_IF_EMPTY=1 pnpm --filter @indyer/db db:seed && pnpm --filter @indyer/api dev"]
 
 FROM base AS client
 RUN pnpm --filter @indyer/web build
