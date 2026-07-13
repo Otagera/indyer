@@ -16,11 +16,7 @@ vi.mock("../lib/share-card.js", () => ({
 }));
 
 vi.mock("../lib/fonts.js", () => ({
-  getFonts: vi.fn(async () => ({
-    playfair: Buffer.from("fake-font"),
-    dmSans: Buffer.from("fake-font"),
-    dmSansBold: Buffer.from("fake-font"),
-  })),
+  fontFiles: ["/fake/playfair.ttf", "/fake/dm-sans.ttf", "/fake/dm-sans-bold.ttf"],
 }));
 
 import { getClient } from "../db/client.js";
