@@ -13,13 +13,15 @@ export function ShareButton() {
       const blob = await res.blob();
 
       const shareUrl = "https://indyer.otagera.xyz";
+      // Share sheets concatenate text and url, so the domain lives only in url;
+      // the clipboard fallbacks below have no url field and keep it in the text.
       const shareText = "Play Indyer at indyer.otagera.xyz";
 
       if (navigator.share && navigator.canShare?.({ files: [new File([blob], "indyer.png", { type: "image/png" })] })) {
         await navigator.share({
           files: [new File([blob], "indyer.png", { type: "image/png" })],
           url: shareUrl,
-          text: shareText,
+          text: "Play Indyer",
         });
         setStatus("success");
         return;
